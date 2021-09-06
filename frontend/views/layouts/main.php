@@ -28,15 +28,15 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::t('app','Bo`sh ish o`rinlari'),
+        'brandLabel' => Yii::t('app','Xalqaro bo`lim'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => Yii::t('app','Home'), 'url' => ['/site/index']],
-        ['label' => Yii::t('app','Questions'), 'url' => ['/site/questions']],
+        //['label' => Yii::t('app','Home'), 'url' => ['/site/index']],
+        //['label' => Yii::t('app','Questions'), 'url' => ['/site/questions']],
 //        ['label' => 'About', 'url' => ['/site/about']],
 //        ['label' => 'Contact', 'url' => ['/site/contact']],
     ];

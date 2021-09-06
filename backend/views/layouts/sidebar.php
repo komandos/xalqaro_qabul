@@ -60,6 +60,7 @@
                     ['label' => 'Province',  'icon' => 'fa fa-map', 'url' => ['/province/index']],
                     ['label' => 'Regions',  'icon' => 'fas fa-city', 'url' => ['/regions/index']],
                     ['label' => 'Genders',  'icon' => 'fa fa-gender', 'url' => ['/gender/index']],
+                    ['label' => 'Section',  'icon' => '', 'url' => ['/section/index']],
 //                    ['label' => 'User',  'icon' => 'fas fa-user', 'url' => ['/user/index']],
 
 
