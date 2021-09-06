@@ -6,11 +6,13 @@ use common\models\Profile;
 use common\models\Province;
 use common\models\Questions;
 use common\models\Regions;
+use common\models\Section;
 use common\models\Students;
 use common\models\Vakancy;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
+use yii\base\BaseObject;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
 use yii\helpers\VarDumper;
@@ -93,20 +95,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Profile();
-//        $model->year_of_graduation = time($_POST['year_of_graduation']);
-//
-        if ($this->request->isPost) {
-            $model->year_of_graduation = strtotime($_POST['Profile']['year_of_graduation']);
-            if ($model->load($this->request->post()) && $model->validate() && $model->uploadImages()) {
-                $model->save();
-                return $this->redirect(['index']);
-            } else {
-                $model->loadDefaultValues();
-            }
-        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => Section::find(),
+            'pagination'=>[
+                'pageSize' =>10
+            ]
+        ]);
         return $this->render('index', [
-            'model' => $model,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -329,7 +325,7 @@ class SiteController extends Controller
 
         $vacancy = $this->getVkancy($id);
         $model = new Profile();
-        $model->vakancy_id = $vacancy->id;
+        $model->section_id = $vacancy->id;
         $model->status = 10;
         $model->created_at = date('Y-m-d H:i:s');
         $model->updated_at = date('Y-m-d H:i:s');
@@ -347,7 +343,14 @@ class SiteController extends Controller
             'vacancy' => $vacancy,
         ]);
     }
-
+    private function getVkancy(int $id): Section
+    {
+        $model = Section::findOne(['id' => $id]);
+        if ($model !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException();
+    }
     /**
      * @throws NotFoundHttpException
      */

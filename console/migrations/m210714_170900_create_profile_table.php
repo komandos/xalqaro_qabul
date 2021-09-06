@@ -43,6 +43,7 @@ class m210714_170900_create_profile_table extends Migration
             'pass_seria' => $this->string(10),
             'pass_num' => $this->string(50),
             'pass_file' => $this->string(200),
+            'section_id'=> $this->integer(),
  ], $tableOptions);
     }
 

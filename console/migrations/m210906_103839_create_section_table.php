@@ -24,6 +24,7 @@ class m210906_103839_create_section_table extends Migration
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ]);
+
     }
 
     /**
