@@ -1,0 +1,261 @@
+<?php
+
+/* @var $this yii\web\View */
+/* @var $model \common\models\Profile */
+
+/* @var $dataProvider \yii\data\ActiveDataProvider */
+
+use backend\widgets\Select2Default;
+use common\models\Gender;
+use common\models\Province;
+use kartik\depdrop\DepDrop;
+use yii\bootstrap4\ActiveForm;
+use yii\grid\GridView;
+use yii\grid\SerialColumn;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\MaskedInput;
+
+$this->title = Yii::t('app', 'UrSU Vacancy');
+?>
+<div class="site-index">
+    <h1>
+        <?= Yii::t('app', 'Form') ?>
+    </h1>
+    <?php $form = ActiveForm::begin(); ?>
+    <table id="PersonalDetails" class="table table-condensed table-bordered">
+        <tbody>
+        <tr>
+            <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;"> O'qishni yakunlagan sanasi</font></font><span class="text-danger"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <?= $form->field($model, 'year_of_graduation')->textInput(['type' =>'date'])->label('Sana') ?>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">To'liq
+                        ism-sharifi </font></font><span class="text-danger"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <?= $form->field($model, 'first_name')->textInput(['maxlength' => true])->label('Ismi') ?>
+
+                        <?= $form->field($model, 'last_name')->textInput(['maxlength' => true])->label('Familiyasi') ?>
+                        <?= $form->field($model, 'patronymic')->textInput(['maxlength' => true])->label('Otasining Ismi') ?>
+
+                        <span class="field-validation-valid text-danger" data-valmsg-for="PersonalDetails.Name"
+                              data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-sm-4 text-right"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">Millati </font></font><span
+                        class="text-danger"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td class="col-sm-8">
+                <?= $form->field($model, 'state_id')->widget(Select2Default::class, [
+                    'data' => ArrayHelper::map(\common\models\State::find()->all(), 'id', 'name'),
+                    'options' => ['placeholder' => 'Select a state ...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ])->label('Davlat'); ?>
+                <?= $form->field($model, 'province_id')->widget(Select2Default::class, [
+                    'data' => ArrayHelper::map(Province::find()->all(), 'id', 'name'),
+                    'options' => ['placeholder' => 'Select a province ...', 'id' => 'cat-id'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ])->label('Viloyat'); ?>
+                <?= $form->field($model, 'region_id')->widget(DepDrop::class, [
+//                    'data' => ArrayHelper::map(Regions::find()->all(),'id','name'),
+                    'options' => ['id' => 'subcat-id'],
+                    'pluginOptions' => [
+                        'depends' => ['cat-id'],
+                        'allowClear' => true,
+                        'url' => Url::to(['/site/subcat'])
+                    ],
+                ])->label('Tuman'); ?>
+                <span class="field-validation-valid text-danger" data-valmsg-for="citizenship_id"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-sm-4 text-right"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">Elektron
+                        pochta manzili </font></font><span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td class="col-sm-8">
+                <?= $form->field($model, 'email')->widget(MaskedInput::class, [
+                    'clientOptions' => [
+                        'alias' => 'email'
+                    ],
+                ]) ?>
+                <span class="field-validation-valid text-danger" data-valmsg-for="PersonalDetails.email"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-sm-4 text-right"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">Tug'ilgan
+                        Sana </font></font><span class="text-danger"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td class="col-sm-8">
+                <?= $form->field($model, 'date_birth')->textInput(['type' => 'date']) ?>
+                <span class="field-validation-valid text-danger" data-valmsg-for="PersonalDetails.email"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-sm-4 text-right"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">Tel. </font><font
+                            style="vertical-align: inherit;">raqami </font></font><span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td class="col-sm-8">
+                <?= $form->field($model, 'phone_1')->widget(MaskedInput::class, [
+                    'mask' => '+99999-999-99-99',
+                ]) ?>
+
+                <?= $form->field($model, 'phone_2')->widget(MaskedInput::class, [
+                    'mask' => '+99999-999-99-99',
+                ]) ?>
+                <span class="field-validation-valid text-danger" data-valmsg-for="PersonalDetails.phone"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Jinsi </font></font><span
+                        class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td>
+                <?= $form->field($model, 'gender_id')->radioList(ArrayHelper::map(Gender::find()->all(), 'id', 'name'))->label(' ') ?>
+                <span class="field-validation-valid text-danger" data-valmsg-for="currentlyInUzbekistan"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Passport
+                        Ma'lumotlari</font>
+                </font>
+                <span class="text-danger"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font>
+            </span>
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <?= $form->field($model, 'pass_seria')->widget(MaskedInput::className(), [
+                                    'mask' => 'AA'
+                                ])
+                                    ->label('Pasport Seriasi') ?>
+                            </div>
+                            <div class="col-md-8">
+                                <?= $form->field($model, 'pass_num')->widget(MaskedInput::className(), [
+                                    'mask' => '9999999'
+                                ])
+                                    ->label('Passport Raqami') ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="field-validation-valid text-danger" data-valmsg-for="haveConvicted"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="sectionHeader"><font style="vertical-align: inherit;"><font
+                    style="vertical-align: inherit;font-size: 20px;">
+                Fayllaringizni quyida yuklang:</font></font><br>
+    </div>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Passport elektronni
+                        shakli </font></font></td>
+            <td>
+                <?= $form->field($model, 'pass_file')->fileInput()->label(' ') ?>
+                <span class="field-validation-valid text-danger" data-valmsg-for="coverLetterFiles"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Image </font></font></td>
+            <td>
+                <?= $form->field($model, 'image')->fileInput()->label(' ') ?>
+                <span class="field-validation-valid text-danger" data-valmsg-for="cvFiles"
+                      data-valmsg-replace="true"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplomlar</font></font>
+            </td>
+            <td>
+                <?= $form->field($model, 'diplom')->fileInput()->label(' ') ?>
+            </td>
+        </tr>
+        <tr>
+            <td><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">Transkriptlar</font></font>
+            </td>
+            <td>
+                <?= $form->field($model, 'transkriptlar')->fileInput()->label(' ') ?>
+            </td>
+        </tr>
+        <tr>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ingliz tili
+                        sertifikati</font></font>
+            </td>
+            <td>
+                <?= $form->field($model, 'sertifikat')->fileInput()->label(' ') ?>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="checkbox" id="agree">
+            <label for="agree">Ushbu anketada keltirilgan
+                ma'lumotlar to'liq va aniq keltrilgan</label>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+</div>
