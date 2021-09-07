@@ -39,7 +39,7 @@ use yii\widgets\MaskedInput;
                 <div class="row">
                     <div class="col-sm-8">
                         <?= $form->field($model, 'year_of_graduation')->textInput(['type' =>'date'])->label('Sana') ?>
-
+                        <strong style="color: rgba(6,146,105,0.49)">O'qishni yakunlagan yilingiz 2019 dan yuqori bo'lishi lozim</strong>
                     </div>
                 </div>
             </td>
@@ -207,7 +207,7 @@ use yii\widgets\MaskedInput;
             <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Passport elektronni
                         shakli </font></font></td>
             <td>
-                <?= $form->field($model, 'pass_file')->fileInput()->label(' ') ?>
+                <?= $form->field($model, 'pass_file')->fileInput(['required'=>true])->label(' ') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="coverLetterFiles"
                       data-valmsg-replace="true"></span>
             </td>
@@ -216,7 +216,7 @@ use yii\widgets\MaskedInput;
         <tr>
             <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Image </font></font></td>
             <td>
-                <?= $form->field($model, 'image')->fileInput()->label(' ') ?>
+                <?= $form->field($model, 'image')->fileInput(['required'=>true])->label(' ') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="cvFiles"
                       data-valmsg-replace="true"></span>
             </td>
@@ -226,15 +226,15 @@ use yii\widgets\MaskedInput;
             <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplomlar</font></font>
             </td>
             <td>
-                <?= $form->field($model, 'diplom')->fileInput()->label(' ') ?>
+                <?= $form->field($model, 'diplom')->fileInput(['required'=>true])->label(' ') ?>
             </td>
         </tr>
         <tr>
             <td><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">Transkriptlar</font></font>
+                            style="vertical-align: inherit;">Transkriptlar(Diplom ilovasi)</font></font>
             </td>
             <td>
-                <?= $form->field($model, 'transkriptlar')->fileInput()->label(' ') ?>
+                <?= $form->field($model, 'transkriptlar')->fileInput(['required'=>true])->label(' ') ?>
             </td>
         </tr>
         <tr>

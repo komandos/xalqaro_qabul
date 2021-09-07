@@ -54,7 +54,7 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['state_id', 'province_id', 'region_id', 'gender_id'], 'required'],
+            [['year_of_graduation','state_id', 'province_id', 'region_id', 'gender_id','first_name','last_name','patronymic','date_birth','phone_1','pass_num','pass_seria'], 'required'],
             [['state_id', 'province_id', 'region_id', 'gender_id', 'status'], 'integer'],
             [['address', 'image'], 'string'],
             [['date_birth', 'created_at', 'updated_at'], 'safe'],

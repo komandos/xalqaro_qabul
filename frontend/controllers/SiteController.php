@@ -9,6 +9,7 @@ use common\models\Regions;
 use common\models\Section;
 use common\models\Students;
 use common\models\Vakancy;
+use common\widgets\Alert;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -322,7 +323,6 @@ class SiteController extends Controller
 
     public function actionSendResume(int $id)
     {
-
         $vacancy = $this->getVkancy($id);
         $model = new Profile();
         $model->section_id = $vacancy->id;
@@ -330,12 +330,15 @@ class SiteController extends Controller
         $model->created_at = date('Y-m-d H:i:s');
         $model->updated_at = date('Y-m-d H:i:s');
         if ($this->request->isPost) {
-            $model->user_id = Yii::$app->user->identity->id;
-            if ($model->load($this->request->post()) && $model->validate() && $model->uploadImages()) {
-                $model->save();
-                return $this->redirect(['index']);
-            } else {
-                $model->loadDefaultValues();
+            if (date('Y',strtotime($_POST['Profile']['year_of_graduation'])) >= 2019 ){
+                if ($model->load($this->request->post()) && $model->validate() && $model->uploadImages()) {
+                    $model->save();
+                    return $this->redirect(['index']);
+                } else {
+                    $model->loadDefaultValues();
+                }
+            } else{
+               Yii::$app->session->setFlash('error','error');
             }
         }
         return $this->render('send-resume', [
