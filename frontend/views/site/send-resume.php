@@ -2,7 +2,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \common\models\Vakancy */
+/* @var $model \common\models\Profile */
 
 /* @var $profile \common\models\Profile */
 
@@ -39,7 +39,19 @@ use yii\widgets\MaskedInput;
                 <div class="row">
                     <div class="col-sm-8">
                         <?= $form->field($model, 'year_of_graduation')->textInput(['type' =>'date'])->label('Sana') ?>
-                        <strong style="color: rgba(6,146,105,0.49)">O'qishni yakunlagan yilingiz 2019 dan yuqori bo'lishi lozim</strong>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;"> shu yerga ogohlantrish yozamiz</font></font><span class="text-danger"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <?= $form->field($model, 'status')->checkbox(['required'=>true])->label(' ') ?>
                     </div>
                 </div>
             </td>
@@ -95,15 +107,18 @@ use yii\widgets\MaskedInput;
                         'url' => Url::to(['/site/subcat'])
                     ],
                 ])->label('Tuman'); ?>
+                <?= $form->field($model,'address')->textInput()->label('Manzil')?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="citizenship_id"
                       data-valmsg-replace="true"></span>
             </td>
         </tr>
 
         <tr>
-            <td class="col-sm-4 text-right"><font style="vertical-align: inherit;"><font
+            <td class="col-sm-4 text-right">
+                <font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">Elektron
-                        pochta manzili </font></font><span class="text-danger"><font
+                        pochta manzili </font></font>
+                <span class="text-danger"><font
                             style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span>
             </td>
@@ -205,7 +220,11 @@ use yii\widgets\MaskedInput;
         <tbody>
         <tr>
             <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Passport elektronni
-                        shakli </font></font></td>
+                        shakli </font></font>
+                <span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
             <td>
                 <?= $form->field($model, 'pass_file')->fileInput(['required'=>true])->label(' ') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="coverLetterFiles"
@@ -214,7 +233,11 @@ use yii\widgets\MaskedInput;
         </tr>
 
         <tr>
-            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Image </font></font></td>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Image </font></font>
+                <span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
             <td>
                 <?= $form->field($model, 'image')->fileInput(['required'=>true])->label(' ') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="cvFiles"
@@ -223,7 +246,10 @@ use yii\widgets\MaskedInput;
         </tr>
 
         <tr>
-            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplomlar</font></font>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplom( notarial tasdqiqlangan holda rus tilida tarjimasi)</font></font>
+                <span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td>
                 <?= $form->field($model, 'diplom')->fileInput(['required'=>true])->label(' ') ?>
@@ -231,7 +257,10 @@ use yii\widgets\MaskedInput;
         </tr>
         <tr>
             <td><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">Transkriptlar(Diplom ilovasi)</font></font>
+                            style="vertical-align: inherit;">Diplom ilovasi( notarial tasdqiqlangan holda rus tilida tarjimasi)</font></font>
+                <span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td>
                 <?= $form->field($model, 'transkriptlar')->fileInput(['required'=>true])->label(' ') ?>
@@ -248,13 +277,6 @@ use yii\widgets\MaskedInput;
 
         </tbody>
     </table>
-    <div class="row">
-        <div class="col-sm-12">
-            <input type="checkbox" id="agree">
-            <label for="agree">Ushbu anketada keltirilgan
-                ma'lumotlar to'liq va aniq keltrilgan</label>
-        </div>
-    </div>
 
     <br>
     <div class="form-group">

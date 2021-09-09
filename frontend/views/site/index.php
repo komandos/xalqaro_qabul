@@ -22,8 +22,8 @@ $this->title = Yii::t('app', 'UrSU Vacancy');
 ?>
 <div class="site-index">
     <h4 class="text-center">
-        <?= Yii::t('app', 'Урганч давлат университетининг 
-2021/2022 ўқув йили қабули учун хорижий олий таълим муассасалари билан ҳамкорликда қўшма таълим дастурлари асосида кадрлар тайёрлаш бўйича тўлов-контракт асосида қабул кўрсаткичлари
+        <?= Yii::t('app', 'Urganch davlat universitetining 
+2021/2022 o`quv yili qabul uchun xorijiy oliy ta`lim muassasalari bilan xamkorlikda qo`shma ta`lim dasturlari asosida kadrlar tayyorlash bo`yicha to`lov-kontrakt asosida qabul ko`rsatkichlari
 ') ?>
     </h4>
     <?= GridView::widget([
@@ -35,32 +35,43 @@ $this->title = Yii::t('app', 'UrSU Vacancy');
         'columns' => [
             ['class' => SerialColumn::class],
             [
-                'label' => 'Шифр',
+                'label' => 'Shifr',
                 'attribute' => 'code',
             ],
             [
-                'label' => 'Таълим йўналишлари ва мутахассисликлар номи',
+                'label' => 'Ta`lim yo`nalishlari va mutaxassisliklari nomi',
                 'attribute' => 'direction',
             ],
             [
-                'label' => 'Ҳамкор хорижий олий таълим муассасаси номи',
+                'label' => 'Xamkor xorijiy oliy ta`lim muassasasi nomi',
                 'attribute' => 'university',
             ],
             [
-                'label' => 'Тўлов-контракт асосида қабул кўрсаткич-лари',
+                'label' => 'To`lov-kantrakti asosida qabul ko`rsatkichlari',
                 'attribute' => 'quota'
             ],
             [
-                'label' => 'Таълим шакли',
+                'label' => 'Ta`lim shakli',
                 'attribute' => 'form_education',
             ],
             [
-                'label' => 'Таълим тили',
+                'label' => 'Ta`lim tili',
                 'attribute' => 'edu_lang',
             ],
             [
-                'label' => 'Ўқиш муддати (ОТМ+ҳамкор ОТМ, йил)',
+                'label' => 'O`qish muddati (OTM + xamkor OTM,yil)',
                 'attribute' => 'duration',
+            ],
+            [
+                'label' => 'Ta`lim turi',
+                'value' =>function(Section $model){
+                    if ($model->type ==='bakalavr'){
+                        return 'Bakalavriyat';
+                    }
+                    if ($model->type === 'magistr'){
+                        return 'Magistratura';
+                    }
+                }
             ],
 
             [

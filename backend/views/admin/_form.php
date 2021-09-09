@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Admin;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
@@ -22,9 +23,22 @@ use yii\widgets\MaskedInput;
 
             <?= $form->field($model, 'email')->widget(MaskedInput::class, [
                 'clientOptions' => [
-                    'alias' =>  'email'
+                    'alias' => 'email'
                 ],
             ]) ?>
+            <?php if (Yii::$app->getUser()->getIdentity()->isAdmin()): ?>
+                <?= $form->field($model, 'role')->dropDownList(
+                    [
+                        Admin::ROLE_XALQARO => 'Xalqaro bo`limi',
+                        Admin::ROLE_USER => 'User',
+                        Admin::ROLE_ADMIN => 'Administrator',
+                    ],
+                    [
+                        'prompt' => "-- Rolini tanlang ---",
+
+                    ]
+                ) ?>
+            <?php endif; ?>
 
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

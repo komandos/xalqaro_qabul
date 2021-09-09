@@ -27,6 +27,23 @@ class SectionController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => \yii\filters\AccessControl::class,
+                    'only' => ['create', 'update','index','view'],
+                    'rules' => [
+                        // deny all POST requests
+//                        [
+//                            'allow' => false,
+//                            'verbs' => ['POST']
+//                        ],
+                        // allow authenticated users
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                        // everything else is denied
+                    ],
+                ],
             ]
         );
     }
@@ -67,7 +84,8 @@ class SectionController extends Controller
     public function actionCreate()
     {
         $model = new Section();
-
+        $model->created_at = time();
+        $model->updated_at = time();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);

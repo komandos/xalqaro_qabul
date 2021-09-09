@@ -11,6 +11,7 @@ use common\models\Profile;
  */
 class ProfileSearch extends Profile
 {
+    public $status;
     /**
      * {@inheritdoc}
      */
@@ -55,7 +56,32 @@ class ProfileSearch extends Profile
             // $query->where('0=1');
             return $dataProvider;
         }
+        $dataProvider->sort->attributes['first_name'] = [
+            'asc' => [
+                'last_name' => SORT_ASC,
+                'first_name' => SORT_ASC,
+                'patronymic' => SORT_ASC
+            ],
 
+            'desc' => [
+                'last_name' => SORT_DESC,
+                'first_name' => SORT_DESC,
+                'patronymic' => SORT_DESC
+
+            ],
+
+        ];
+        $dataProvider->sort->attributes['pass_num'] = [
+            'asc' => [
+                'pass_num' => SORT_ASC,
+                'pass_seria' => SORT_ASC,
+            ],
+
+            'desc' => [
+                'pass_num' => SORT_DESC,
+                'pass_seria' => SORT_DESC,
+            ],
+        ];
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -70,10 +96,7 @@ class ProfileSearch extends Profile
             'year_of_graduation' => $this->year_of_graduation,
         ]);
 
-        $query->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'patronymic', $this->patronymic])
-            ->andFilterWhere(['like', 'address', $this->address])
+        $query->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'phone_1', $this->phone_1])
             ->andFilterWhere(['like', 'phone_2', $this->phone_2])
             ->andFilterWhere(['like', 'email', $this->email])
@@ -81,9 +104,12 @@ class ProfileSearch extends Profile
             ->andFilterWhere(['like', 'diplom', $this->diplom])
             ->andFilterWhere(['like', 'transkriptlar', $this->transkriptlar])
             ->andFilterWhere(['like', 'sertifikat', $this->sertifikat])
-            ->andFilterWhere(['like', 'pass_seria', $this->pass_seria])
-            ->andFilterWhere(['like', 'pass_num', $this->pass_num])
-            ->andFilterWhere(['like', 'pass_file', $this->pass_file]);
+            ->andFilterWhere(['like', 'pass_file', $this->pass_file])
+            ->orFilterWhere(['like', 'first_name', $this->first_name])
+            ->orFilterWhere(['like', 'last_name', $this->first_name])
+            ->orFilterWhere(['like', 'patronymic', $this->first_name])
+            ->orFilterWhere(['like', 'pass_seria', $this->pass_num])
+            ->orFilterWhere(['like', 'pass_num', $this->pass_num]);
 
         return $dataProvider;
     }

@@ -15,6 +15,7 @@ use Yii;
  * @property string|null $form_education
  * @property string|null $edu_lang
  * @property string|null $duration
+ * @property string|null $type
  * @property int|null $created_at
  * @property int|null $updated_at
  */
@@ -35,6 +36,7 @@ class Section extends \yii\db\ActiveRecord
     {
         return [
             [['quota', 'created_at', 'updated_at'], 'integer'],
+            [['type'], 'string'],
             [['code'], 'string', 'max' => 150],
             [['direction', 'university'], 'string', 'max' => 255],
             [['form_education', 'edu_lang', 'duration'], 'string', 'max' => 100],
@@ -55,6 +57,7 @@ class Section extends \yii\db\ActiveRecord
             'form_education' => 'Form Education',
             'edu_lang' => 'Edu Lang',
             'duration' => 'Duration',
+            'type' => 'Type',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -62,10 +65,10 @@ class Section extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return \common\query\models\SectionQuery the active query used by this AR class.
+     * @return \common\models\query\SectionQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \common\query\models\SectionQuery(get_called_class());
+        return new \common\models\query\SectionQuery(get_called_class());
     }
 }

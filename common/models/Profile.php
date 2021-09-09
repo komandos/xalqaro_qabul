@@ -54,7 +54,7 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['year_of_graduation','state_id', 'province_id', 'region_id', 'gender_id','first_name','last_name','patronymic','date_birth','phone_1','pass_num','pass_seria'], 'required'],
+            [['year_of_graduation', 'state_id', 'province_id', 'region_id', 'gender_id', 'first_name', 'last_name', 'patronymic', 'date_birth', 'phone_1', 'pass_num', 'pass_seria'], 'required'],
             [['state_id', 'province_id', 'region_id', 'gender_id', 'status'], 'integer'],
             [['address', 'image'], 'string'],
             [['date_birth', 'created_at', 'updated_at'], 'safe'],
@@ -110,6 +110,10 @@ class Profile extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Gender::className(), ['id' => 'gender_id']);
     }
+    public function getState()
+    {
+        return $this->hasOne(State::className(), ['id' => 'state_id']);
+    }
 
     /**
      * Gets query for [[Province]].
@@ -130,63 +134,44 @@ class Profile extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Regions::className(), ['id' => 'region_id']);
     }
+
     public function uploadImages(): bool
     {
-        $image = UploadedFile::getInstance($this, 'image');
-        $diplom = UploadedFile::getInstance($this, 'diplom');
-        $sertifikat = UploadedFile::getInstance($this, 'sertifikat');
-        $transkript = UploadedFile::getInstance($this, 'transkriptlar');
-        $passport = UploadedFile::getInstance($this, 'pass_file');
 
-        $image_url = uniqid() . '.' . $image->extension;
-        $diplom_url = uniqid() . '.' . $diplom->extension;
-        $sertifikat_url = uniqid() . '.' . $sertifikat->extension;
-        $transkript_url = uniqid() . '.' . $transkript->extension;
-        $passport_url = uniqid() . '.' . $passport->extension;
-
-        $path_up = Yii::getAlias('@uploads/') . date('Y-M');
-        $path_diplom = Yii::getAlias('@diplom/') . date('Y-M');
-        $path_sertifikat = Yii::getAlias('@sertifikat/') . date('Y-M');
-        $path_transkript = Yii::getAlias('@transript/') . date('Y-M');
-        $path_passport = Yii::getAlias('@passport/') . date('Y-M');
-
-
-        if (FileHelper::createDirectory($path_transkript) > strtotime(date('Y-M'))) {
+        if (!$this->uploadFolder('uploads', 'image')) {
             return false;
         }
-        if (FileHelper::createDirectory($path_sertifikat) > strtotime(date('Y-M'))) {
+        if (!$this->uploadFolder('diplom', 'diplom')) {
             return false;
         }
-        if (FileHelper::createDirectory($path_up) > strtotime(date('Y-M'))) {
+        if (!$this->uploadFolder('password', 'pass_file')) {
             return false;
         }
-        if (FileHelper::createDirectory($path_diplom) > strtotime(date('Y-M'))) {
+        if (!$this->uploadFolder('transript', 'transkriptlar')) {
             return false;
         }
-        if (FileHelper::createDirectory($path_passport) > strtotime(date('Y-M'))) {
-            return false;
-        }
-
-        if ($transkript === null || !$transkript->saveAs($path_transkript . '/' . $transkript_url)) {
-            return false;
-        }
-        $this->transkriptlar = $transkript_url;
-
-        if ($sertifikat === null || !$sertifikat->saveAs($path_sertifikat . '/' . $sertifikat_url)) {
-            return false;
-        }
-        $this->sertifikat = $sertifikat_url;
-
-        if ($diplom === null || !$diplom->saveAs($path_diplom . '/' . $diplom_url)) {
-            return false;
-        }
-        $this->diplom = $diplom_url;
-
-        if ($passport === null || !$passport->saveAs($path_passport . '/' . $passport_url)) {
-            return false;
-        }
-        $this->pass_file = $passport_url;
-
+        $this->uploadFolder('sertifikat', 'sertifikat');
         return true;
+    }
+
+    public function uploadFolder(string $path, string $attribute)
+    {
+        $path_up = Yii::getAlias('@assets') . '/' . $path .'/'. date('Y-m');
+        $file = UploadedFile::getInstance($this, $attribute);
+
+        if ($file instanceof UploadedFile) {
+            $fileUrl = uniqid() . '.' . $file->extension;
+            if (FileHelper::createDirectory($path_up) > strtotime(date('Y-m'))) {
+                return false;
+            }
+
+            if (!$file->saveAs($path_up . '/' . $fileUrl)) {
+                return false;
+            }
+            $this->$attribute = $path.'/'.date('Y-m') . '/' . $fileUrl;
+            return true;
+        }
+
+        return false;
     }
 }

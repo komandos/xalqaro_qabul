@@ -1,3 +1,13 @@
+<?php
+
+use common\models\Admin;
+use hail812\adminlte\widgets\Menu;
+
+/**
+ * @var Admin   $user
+ */
+$user = Yii::$app->getUser()->getIdentity();
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -32,62 +42,23 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
+
             <?php
-            echo \hail812\adminlte\widgets\Menu::widget([
-                'items' => [
-                    ['label' => 'Profile',  'icon' => '	fas fa-user-circle', 'url' => ['/profile/index']],
-                    ['label' => 'Administrators',  'icon' => 'fas fa-user-shield', 'url' => ['/admin/index']],
-//                    [
-//                        'label' => '',
-//                        'items' => [
-//                            ['label' => 'Employees List', 'iconStyle' => 'far','url'=>['employees/index']],
-////                            [
-////                                'label' => 'Level2',
-////                                'iconStyle' => 'far',
-////                                'items' => [
-////                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-////                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-////                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-////                                ]
-////                            ],
-//                            ['label' => 'Employees Type', 'iconStyle' => 'far','url'=>['employee-type/index']],
-//                            ['label' => 'Sections', 'iconStyle' => 'far','url'=>['sections/index']],
-//                            ['label' => 'Positions', 'iconStyle' => 'far','url' =>['positions/index']]
-//                        ]
-//                    ],
-                    ['label' => 'Departments',  'icon' => 'fa fa-map', 'url' => ['/department/index']],
-                    ['label' => 'States',  'icon' => 'fas fa-city', 'url' => ['/state/index']],
-                    ['label' => 'Province',  'icon' => 'fa fa-map', 'url' => ['/province/index']],
-                    ['label' => 'Regions',  'icon' => 'fas fa-city', 'url' => ['/regions/index']],
-                    ['label' => 'Genders',  'icon' => 'fa fa-gender', 'url' => ['/gender/index']],
-                    ['label' => 'Section',  'icon' => '', 'url' => ['/section/index']],
-//                    ['label' => 'User',  'icon' => 'fas fa-user', 'url' => ['/user/index']],
+            $menuItems = [];
+            if ($user->isAdmin() || $user->isXalqaro()) {
+                $menuItems[] = ['label' => 'Profile', 'icon' => '	fas fa-user-circle', 'url' => ['/profile/index']];
 
-
-//                    ['label' => 'Yii2 PROVIDED', 'header' => true],
-//                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-//                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-//                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
-//                    ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
-//                    ['label' => 'Level1'],
-//                    [
-//                        'label' => 'Level1',
-//                        'items' => [
-//                            ['label' => 'Level2', 'iconStyle' => 'far'],
-//                            [
-//                                'label' => 'Level2',
-//                                'iconStyle' => 'far',
-//                                'items' => [
-//                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-//                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-//                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-//                                ]
-//                            ],
-//                            ['label' => 'Level2', 'iconStyle' => 'far']
-//                        ]
-//                    ],
-//                    ['label' => 'Level1'],
-                ],
+                $menuItems[] = ['label' => 'Section', 'icon' => 'fa fa-questions', 'url' => ['/section/index']];
+            }
+            if ($user->isAdmin()){
+                $menuItems[] = ['label' => 'Administrator', 'icon' => '	fas fa-user-circle', 'url' => ['/admin/index']];
+                $menuItems[] = ['label' => 'States', 'icon' => 'fa fa-questions', 'url' => ['/state/index']];
+                $menuItems[] = ['label' => 'Province', 'icon' => 'fa fa-questions', 'url' => ['/province/index']];
+                $menuItems[] = ['label' => 'Region', 'icon' => 'fa fa-questions', 'url' => ['/regions/index']];
+                $menuItems[] = ['label' => 'Gender', 'icon' => 'fa fa-questions', 'url' => ['/gender/index']];
+            }
+            echo Menu::widget([
+                'items' => $menuItems,
             ]);
             ?>
         </nav>

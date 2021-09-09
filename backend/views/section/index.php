@@ -10,36 +10,41 @@ use yii\grid\GridView;
 $this->title = 'Sections';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="section-index">
+<div class="container-fluid">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="card">
+        <div class="card-body">
+            <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Section', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <p>
+                <?= Html::a('Create Section', ['create'], ['class' => 'btn btn-info']) ?>
+            </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'code',
-            'direction',
-            'university',
-            'quota',
-            //'form_education',
-            //'edu_lang',
-            //'duration',
-            //'created_at',
-            //'updated_at',
+                    //'id',
+                    'code',
+                    'direction',
+                    'university',
+                    'quota',
+                    'form_education',
+                    'edu_lang',
+                    'duration',
+                    'type',
+                    //'created_at',
+                    //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
 
 
+        </div>
+    </div>
 </div>

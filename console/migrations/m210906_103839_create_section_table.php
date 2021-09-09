@@ -21,6 +21,7 @@ class m210906_103839_create_section_table extends Migration
             'form_education' => $this->string(100),
             'edu_lang' => $this->string(100),
             'duration' => $this->string(100),
+            'type' => $this->string(100),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ]);

@@ -2,12 +2,12 @@
 
 namespace common\models;
 
+use common\models\query\AdminQuery;
 use Yii;
 use yii\web\IdentityInterface;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\base\NotSupportedException;
-
 
 
 /**
@@ -23,12 +23,16 @@ use yii\base\NotSupportedException;
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
+ * @property string $role
  */
 class Admin extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    public const ROLE_USER = 'guest';
+    public const ROLE_XALQARO = 'xalqaro';
+    public const ROLE_ADMIN = 'admin';
 
     /**
      * {@inheritdoc}
@@ -51,15 +55,20 @@ class Admin extends ActiveRecord implements IdentityInterface
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['role'], 'string'],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['role', 'default', 'value' => self::ROLE_USER],
             [['password_reset_token'], 'unique'],
         ];
     }
+
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
+
     /**
      * {@inheritdoc}
      */
@@ -75,16 +84,17 @@ class Admin extends ActiveRecord implements IdentityInterface
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'role' => Yii::t('app', 'Role'),
         ];
     }
 
     /**
      * {@inheritdoc}
-     * @return \common\models\query\AdminQuery the active query used by this AR class.
+     * @return AdminQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \common\models\query\AdminQuery(get_called_class());
+        return new AdminQuery(static::class);
     }
 
     public static function findIdentity($id)
@@ -135,7 +145,8 @@ class Admin extends ActiveRecord implements IdentityInterface
      * @param string $token verify email token
      * @return static|null
      */
-    public static function findByVerificationToken($token) {
+    public static function findByVerificationToken($token)
+    {
         return static::findOne([
             'verification_token' => $token,
             'status' => self::STATUS_INACTIVE
@@ -154,7 +165,7 @@ class Admin extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -235,4 +246,22 @@ class Admin extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isXalqaro(): bool
+    {
+        return $this->role === self::ROLE_XALQARO;
+    }
+
+
+    public function isUser(): bool
+    {
+        return $this->role === self::ROLE_USER;
+    }
+
+
 }

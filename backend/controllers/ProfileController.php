@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Profile;
 use backend\models\search\ProfileSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -129,5 +130,13 @@ class ProfileController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionDownload($file){
+        $path = Yii::getAlias('@assets/') . $file;
+        if (file_exists($path)) {
+            return Yii::$app->response->sendFile($path);
+        }
+
     }
 }

@@ -98,8 +98,8 @@ class SiteController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Section::find(),
-            'pagination'=>[
-                'pageSize' =>10
+            'pagination' => [
+                'pageSize' => 10
             ]
         ]);
         return $this->render('index', [
@@ -294,7 +294,6 @@ class SiteController extends Controller
     }
 
 
-
     public function actionSubcat()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -326,19 +325,16 @@ class SiteController extends Controller
         $vacancy = $this->getVkancy($id);
         $model = new Profile();
         $model->section_id = $vacancy->id;
-        $model->status = 10;
         $model->created_at = date('Y-m-d H:i:s');
         $model->updated_at = date('Y-m-d H:i:s');
         if ($this->request->isPost) {
-            if (date('Y',strtotime($_POST['Profile']['year_of_graduation'])) >= 2019 ){
-                if ($model->load($this->request->post()) && $model->validate() && $model->uploadImages()) {
-                    $model->save();
+            if ($model->load($this->request->post()) && $model->validate()) {
+                if ($model->uploadImages() && $model->save()) {
+                    Yii::$app->session->setFlash('success','Sizning ma`lumotlaringiz yuklandi!');
                     return $this->redirect(['index']);
-                } else {
-                    $model->loadDefaultValues();
                 }
-            } else{
-               Yii::$app->session->setFlash('error','error');
+            } else {
+                $model->loadDefaultValues();
             }
         }
         return $this->render('send-resume', [
@@ -346,6 +342,7 @@ class SiteController extends Controller
             'vacancy' => $vacancy,
         ]);
     }
+
     private function getVkancy(int $id): Section
     {
         $model = Section::findOne(['id' => $id]);
@@ -354,9 +351,4 @@ class SiteController extends Controller
         }
         throw new NotFoundHttpException();
     }
-    /**
-     * @throws NotFoundHttpException
-     */
-
-
 }
