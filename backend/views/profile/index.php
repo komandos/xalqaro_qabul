@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
+                'pager' => ['class' => '\yii\bootstrap4\LinkPager'],
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
@@ -61,7 +62,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'gender_id',
                     //'image:ntext',
                     //'status',
-
+                    //'section_id',
+                    [
+                        'label' => 'Direction',
+                        'attribute' => 'direction',
+                        'value' => 'section.direction'
+                    ],
+                    [
+                        'label' => 'university',
+                        'attribute' => 'university',
+                        'value' => 'section.university'
+                    ],
                     [
                         'attribute' => 'status',
                         'format' => 'html',
@@ -77,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->pass_seria . ' ' . $model->pass_num;
                         }
                     ],
-                    //'created_at',
+                    'created_at',
                     //'updated_at',
                     //'diplom',
                     //'transkriptlar',
@@ -89,7 +100,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} {delete}',
+                        'template' => '{view}{delete}',
+                        'visibleButtons'=>[
+                            'delete' => Yii::$app->getUser()->getIdentity()->isAdmin(),
+                        ]
                     ],
                 ],
             ]); ?>

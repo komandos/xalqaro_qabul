@@ -71,4 +71,8 @@ class Section extends \yii\db\ActiveRecord
     {
         return new \common\models\query\SectionQuery(get_called_class());
     }
+    public function getProfiles()
+    {
+        return $this->hasMany(Profile::className(), ['section_id' => 'id']);
+    }
 }

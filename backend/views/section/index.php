@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Profile;
+use common\models\Section;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -37,10 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     'edu_lang',
                     'duration',
                     'type',
+                    [
+                        'label' => 'Ro`yxatdan o`tkanlar soni',
+                        'attribute' => 'count',
+                        'value' => function (Section $model) {
+                            return count(Profile::find()->where(['section_id' => $model->id])->all());
+                        }
+                    ],
                     //'created_at',
                     //'updated_at',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view}{delete}',
+                        'visibleButtons'=>[
+                            'delete' => Yii::$app->getUser()->getIdentity()->isAdmin(),
+                            'update' => Yii::$app->getUser()->getIdentity()->isAdmin(),
+                        ]
+                    ],
                 ],
             ]); ?>
 

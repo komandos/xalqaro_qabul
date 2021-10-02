@@ -15,16 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -127,7 +117,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     } else {
                         return Html::a('Yuklash', ['profile/download', 'file' => $model->pass_file], ['target' => '_blank', 'class' => 'fa fa-download']);
                     }
-
                 }
             ],
             'created_at',

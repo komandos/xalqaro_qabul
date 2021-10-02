@@ -12,6 +12,9 @@ use common\models\Profile;
 class ProfileSearch extends Profile
 {
     public $status;
+    public $university;
+    public $direction;
+
     /**
      * {@inheritdoc}
      */
@@ -19,7 +22,7 @@ class ProfileSearch extends Profile
     {
         return [
             [['id', 'state_id', 'province_id', 'region_id', 'gender_id', 'status', 'year_of_graduation'], 'integer'],
-            [['first_name', 'last_name', 'patronymic', 'address', 'phone_1', 'phone_2', 'date_birth', 'email', 'image', 'created_at', 'updated_at', 'diplom', 'transkriptlar', 'sertifikat', 'pass_seria', 'pass_num', 'pass_file'], 'safe'],
+            [['university', 'direction', 'first_name', 'last_name', 'patronymic', 'address', 'phone_1', 'phone_2', 'date_birth', 'email', 'image', 'diplom', 'transkriptlar', 'sertifikat', 'pass_seria', 'pass_num', 'pass_file'], 'safe'],
         ];
     }
 
@@ -56,6 +59,9 @@ class ProfileSearch extends Profile
             // $query->where('0=1');
             return $dataProvider;
         }
+        $query->innerJoinWith([
+            'section'
+        ]);
         $dataProvider->sort->attributes['first_name'] = [
             'asc' => [
                 'last_name' => SORT_ASC,
@@ -71,6 +77,22 @@ class ProfileSearch extends Profile
             ],
 
         ];
+        $dataProvider->sort->attributes['direction'] = [
+            'asc' => [
+                'section.direction' => SORT_ASC,
+            ],
+            'desc' => [
+                'section.direction' => SORT_DESC,
+            ]
+        ];
+        $dataProvider->sort->attributes['university'] = [
+            'asc' => [
+                'section.university' => SORT_ASC,
+            ],
+            'desc' => [
+                'section.university' => SORT_DESC,
+            ]
+        ];
         $dataProvider->sort->attributes['pass_num'] = [
             'asc' => [
                 'pass_num' => SORT_ASC,
@@ -82,6 +104,8 @@ class ProfileSearch extends Profile
                 'pass_seria' => SORT_DESC,
             ],
         ];
+
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -91,8 +115,8 @@ class ProfileSearch extends Profile
             'date_birth' => $this->date_birth,
             'gender_id' => $this->gender_id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+//            'created_at' => $this->created_at,
+//            'updated_at' => $this->updated_at,
             'year_of_graduation' => $this->year_of_graduation,
         ]);
 

@@ -55,7 +55,7 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             [['year_of_graduation', 'state_id', 'province_id', 'region_id', 'gender_id', 'first_name', 'last_name', 'patronymic', 'date_birth', 'phone_1', 'pass_num', 'pass_seria'], 'required'],
-            [['state_id', 'province_id', 'region_id', 'gender_id', 'status'], 'integer'],
+            [['state_id', 'province_id', 'region_id', 'gender_id','section_id', 'status'], 'integer'],
             [['address', 'image'], 'string'],
             [['date_birth', 'created_at', 'updated_at'], 'safe'],
             [['first_name', 'last_name', 'patronymic', 'phone_1', 'phone_2', 'email', 'pass_num'], 'string', 'max' => 50],
@@ -113,6 +113,15 @@ class Profile extends \yii\db\ActiveRecord
     public function getState()
     {
         return $this->hasOne(State::className(), ['id' => 'state_id']);
+    }
+    /**
+     * Gets query for [[Section]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSection()
+    {
+        return $this->hasOne(Section::className(), ['id' => 'section_id']);
     }
 
     /**
