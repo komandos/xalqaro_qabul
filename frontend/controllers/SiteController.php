@@ -338,10 +338,11 @@ class SiteController extends Controller
                 $model->loadDefaultValues();
             }
         }
-        return $this->render('send-resume', [
-            'model' => $model,
-            'vacancy' => $vacancy,
-        ]);
+        return $this->render('view');
+//        return $this->render('send-resume', [
+//            'model' => $model,
+//            'vacancy' => $vacancy,
+//        ]);
     }
 
     private function getVkancy(int $id): Section

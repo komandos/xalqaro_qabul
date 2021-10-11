@@ -121,7 +121,7 @@ class Profile extends \yii\db\ActiveRecord
      */
     public function getSection()
     {
-        return $this->hasOne(Section::className(), ['id' => 'section_id']);
+        return $this->hasOne(Section::class, ['id' => 'section_id']);
     }
 
     /**

@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?= Html::a('Export' ,['index','export'=>1],['class'=>'btn btn-outline-info'])?>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,

@@ -2,9 +2,15 @@
 
 namespace backend\models\search;
 
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Profile;
+use yii\db\QueryInterface;
+use yii\helpers\FileHelper;
 
 /**
  * ProfileSearch represents the model behind the search form of `common\models\Profile`.
@@ -137,4 +143,69 @@ class ProfileSearch extends Profile
 
         return $dataProvider;
     }
+    public function exportToExcel(?QueryInterface $query)
+    {
+        $speadsheet = new Spreadsheet();
+        $sheet = $speadsheet->getActiveSheet();
+        $title = "Qo`shma dastur";
+        $sheet->setTitle(substr($title, 0, 31));
+        $row = 1;
+        $col = 1;
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "#", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Familiyasi", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Ismi", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Sharifi", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Pasport seria", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Pasport num", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Davlati", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Viloyat", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Tuman", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Manzil", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Phone1", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Phone2", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Date Birth", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Email", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Gender", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "O`qishni yakunlagan yil", DataType::TYPE_STRING);
+        $sheet->setCellValueExplicitByColumnAndRow($col++, $row, "Yo`nalishi", DataType::TYPE_STRING);
+        $key = 0;
+        $models = $query->all();
+        foreach ($models as $item) {
+            /**
+             * @var Profile $item
+             */
+            $row++;
+            $col = 1;
+            $key++;
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $key, DataType::TYPE_NUMERIC);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->last_name, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->first_name, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->patronymic, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->pass_seria, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->pass_num, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->state->name, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->province->name, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->region->name, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->address, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->phone_1, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->phone_2, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->date_birth, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->email, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->gender->name, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->year_of_graduation, DataType::TYPE_STRING);
+            $sheet->setCellValueExplicitByColumnAndRow($col++, $row, $item->section->direction, DataType::TYPE_STRING);
+
+        }
+        $name = 'qtd-' . Yii::$app->formatter->asDatetime(time(), 'php:d_m_Y_h_i_s') . '.xlsx';
+        $writer = new Xlsx($speadsheet);
+        $dir = Yii::getAlias('@assets/excel_export');
+        if (!is_dir($dir)) {
+            FileHelper::createDirectory($dir, 0777);
+        }
+
+        $fileName = $dir . DIRECTORY_SEPARATOR . $name;
+        $writer->save($fileName);
+        return Yii::$app->response->sendFile($fileName);
+    }
+
 }

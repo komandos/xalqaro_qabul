@@ -36,11 +36,13 @@ class ProfileController extends Controller
      * Lists all Profile models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex(int $export=null)
     {
         $searchModel = new ProfileSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
+        if ($export === 1) {
+            $searchModel->exportToExcel($dataProvider->query);
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
