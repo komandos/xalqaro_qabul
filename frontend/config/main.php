@@ -13,9 +13,12 @@ return [
     'language' => 'uz',
     'sourceLanguage' => 'en',
     'controllerNamespace' => 'frontend\controllers',
+    'homeUrl' => '/',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'baseUrl' => '',
+
         ],
         'user' => [
             'identityClass' => 'common\models\User',
