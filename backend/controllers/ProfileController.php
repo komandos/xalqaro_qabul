@@ -5,9 +5,11 @@ namespace backend\controllers;
 use common\models\Profile;
 use backend\models\search\ProfileSearch;
 use Yii;
+use yii\db\Connection;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Request;
 
 /**
  * ProfileController implements the CRUD actions for Profile model.
@@ -28,16 +30,21 @@ class ProfileController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+
             ]
         );
     }
 
     /**
      * Lists all Profile models.
-     * @return mixed
+     * @param int|null $export
+     * @param Request $request
+     * @param Connection $db
+     * @return string
      */
-    public function actionIndex(int $export=null)
+    public function actionIndex(int $export=null, Request  $request, Connection $db): string
     {
+//        dd($db->createCommand("select * from profile limit 10")->queryAll());
         $searchModel = new ProfileSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         if ($export === 1) {

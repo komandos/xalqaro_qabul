@@ -40,6 +40,7 @@ use yii\web\UploadedFile;
  */
 class Profile extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */

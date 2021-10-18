@@ -62,6 +62,14 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+//                    [
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                        'controllers' => ['site/index'],
+//                        'matchCallback' => function($rule,$action){
+//                            return date('Y-m-d') === '21-10-14';
+//                        }
+//                    ],
                 ],
             ],
             'verbs' => [
@@ -322,6 +330,7 @@ class SiteController extends Controller
 
     public function actionSendResume(int $id)
     {
+        //dd(date('Y-m-d h-i-s'));
         $vacancy = $this->getVkancy($id);
         $model = new Profile();
         $model->section_id = $vacancy->id;
@@ -338,11 +347,11 @@ class SiteController extends Controller
                 $model->loadDefaultValues();
             }
         }
-        return $this->render('view');
-//        return $this->render('send-resume', [
-//            'model' => $model,
-//            'vacancy' => $vacancy,
-//        ]);
+//        return $this->render('view');
+        return $this->render('send-resume', [
+            'model' => $model,
+            'vacancy' => $vacancy,
+        ]);
     }
 
     private function getVkancy(int $id): Section
