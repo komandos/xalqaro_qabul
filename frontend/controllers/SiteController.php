@@ -334,8 +334,8 @@ class SiteController extends Controller
         $vacancy = $this->getVkancy($id);
         $model = new Profile();
         $model->section_id = $vacancy->id;
-        $model->created_at = date('Y-m-d H:i:s');
-        $model->updated_at = date('Y-m-d H:i:s');
+        $model->created_at = date('Y-m-d');
+        $model->updated_at = date('Y-m-d');
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->validate()) {
                 if ($model->uploadImages() && $model->save()) {

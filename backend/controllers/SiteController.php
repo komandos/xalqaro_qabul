@@ -6,10 +6,13 @@ use backend\models\search\LatestSearch;
 use backend\models\search\ProfileSearch;
 use common\models\AdminLogin;
 use common\models\LoginForm;
+use common\models\Profile;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\Connection;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Request;
 use yii\web\Response;
@@ -107,11 +110,23 @@ class SiteController extends Controller
     }
     public function actionLatest()
     {
-        $searchModel = new LatestSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        return $this->render('/site/latest', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+//        VarDumper::dump(date('Y-m-d'),10,true);
+//        exit();
+        $query = Profile::find()->where(['>','created_at', '2021-11-19'])->orWhere(['=','created_at', '2021-11-20']);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
+        ]);
+        return $this->render('latest',[
+            'dataProvider'=>$provider
         ]);
     }
 }
