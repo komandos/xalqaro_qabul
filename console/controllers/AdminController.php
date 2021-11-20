@@ -29,9 +29,9 @@ class AdminController extends Controller
 {
     public function actionCreate(){
         $model = new Admin();
-        $model->username = 'Admin';
+        $model->username = 'Administrator';
         $model->password_hash = Yii::$app->getSecurity()->generatePasswordHash('password');
-        $model->email = 'admin@urdu.uz';
+        $model->email = 'admin@gmail.com';
         $model->generateAuthKey();
         $model->generateEmailVerificationToken();
         $model->status = 10;

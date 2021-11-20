@@ -48,6 +48,7 @@ $user = Yii::$app->getUser()->getIdentity();
             if ($user->isAdmin() || $user->isXalqaro()) {
                 $menuItems[] = ['label' => 'Profile', 'icon' => '	fas fa-user-circle', 'url' => ['/profile/index']];
 
+                $menuItems[] = ['label' => 'Latest', 'icon' => 'fa fa-user-circle', 'url' => ['site/latest']];
                 $menuItems[] = ['label' => 'Section', 'icon' => 'fa fa-questions', 'url' => ['/section/index']];
             }
             if ($user->isAdmin()){
