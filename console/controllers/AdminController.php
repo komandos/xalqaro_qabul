@@ -35,6 +35,7 @@ class AdminController extends Controller
         $model->generateAuthKey();
         $model->generateEmailVerificationToken();
         $model->status = 10;
+        $model->role = 'admin';
         $model->save();
     }
 

@@ -30,6 +30,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'duration')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'type')->dropDownList(['magistr'=>'magistr','bakalavr'=>'bakalavr']) ?>
+            <?= $form->field($model, 'status')->dropDownList(['0'=>'DeActive','1'=>'Active'],['prompt'=>'--Select--']) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

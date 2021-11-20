@@ -105,7 +105,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Section::find(),
+            'query' => Section::find()->where(['status'=>1]),
             'pagination' => [
                 'pageSize' => 10
             ]

@@ -16,6 +16,7 @@ use Yii;
  * @property string|null $edu_lang
  * @property string|null $duration
  * @property string|null $type
+ * @property integer|null $status
  * @property int|null $created_at
  * @property int|null $updated_at
  */
@@ -35,7 +36,7 @@ class Section extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['quota', 'created_at', 'updated_at'], 'integer'],
+            [['quota','status', 'created_at', 'updated_at'], 'integer'],
             [['type'], 'string'],
             [['code'], 'string', 'max' => 150],
             [['direction', 'university'], 'string', 'max' => 255],
@@ -58,6 +59,7 @@ class Section extends \yii\db\ActiveRecord
             'edu_lang' => 'Edu Lang',
             'duration' => 'Duration',
             'type' => 'Type',
+            'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
