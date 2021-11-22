@@ -106,10 +106,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view}{delete}{update}',
+                        'template' => '{view}{delete}',
                         'visibleButtons'=>[
                             'delete' => Yii::$app->getUser()->getIdentity()->isAdmin(),
-                            'update' => Yii::$app->getUser()->getIdentity()->isAdmin(),
+//                            'update' => Yii::$app->getUser()->getIdentity()->isAdmin(),
                         ]
                     ],
                 ],

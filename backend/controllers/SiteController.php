@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Request;
 use yii\web\Response;
 
@@ -36,7 +37,7 @@ class SiteController extends Controller
                             'allow' => true,
                         ],
                         [
-                            'actions' => ['logout', 'index','latest'],
+                            'actions' => ['logout', 'index','latest','delete','view'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
@@ -127,6 +128,26 @@ class SiteController extends Controller
         ]);
         return $this->render('latest',[
             'dataProvider'=>$provider
+        ]);
+    }
+    protected function findModel($id)
+    {
+        if (($model = Profile::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['latest']);
+    }
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 }
