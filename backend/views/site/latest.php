@@ -89,6 +89,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     'created_at',
+                    [
+                            'attribute'=>'created_at',
+                        'value'=>function(Profile $model){
+                            return date('Y-m-d');
+                        }
+                    ],
                     //'updated_at',
                     //'diplom',
                     //'transkriptlar',
@@ -100,9 +106,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view}{delete}',
+                        'template' => '{view}{delete}{update}',
                         'visibleButtons'=>[
                             'delete' => Yii::$app->getUser()->getIdentity()->isAdmin(),
+                            'update' => Yii::$app->getUser()->getIdentity()->isAdmin(),
                         ]
                     ],
                 ],
