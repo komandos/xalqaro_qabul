@@ -8,6 +8,7 @@ use common\models\Questions;
 use common\models\Regions;
 use common\models\Section;
 use common\models\Students;
+use common\models\TurkmanProfile;
 use common\models\Vakancy;
 use common\widgets\Alert;
 use frontend\models\ResendVerificationEmailForm;
@@ -349,6 +350,32 @@ class SiteController extends Controller
         }
 //        return $this->render('view');
         return $this->render('send-resume', [
+            'model' => $model,
+            'vacancy' => $vacancy,
+        ]);
+    }
+
+    public function actionResumeSend(int $id)
+    {
+        //dd(date('Y-m-d h-i-s'));
+        $vacancy = $this->getVkancy($id);
+        $model = new TurkmanProfile();
+        $model->section_id = $vacancy->id;
+        $model->created_at = date('Y-m-d');
+        $model->updated_at = date('Y-m-d');
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->validate()) {
+                if ($model->uploadImages() && $model->save()) {
+                    Yii::$app->session->setFlash('success','Sizning ma`lumotlaringiz yuklandi!');
+                    return $this->redirect(['index']);
+                }
+            }
+            else {
+                $model->loadDefaultValues();
+            }
+        }
+//        return $this->render('view');
+        return $this->render('resume-send', [
             'model' => $model,
             'vacancy' => $vacancy,
         ]);

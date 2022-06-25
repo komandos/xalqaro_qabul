@@ -82,6 +82,14 @@ $this->title = Yii::t('app', 'UrSU Vacancy');
                 }
 
             ],
+            [
+                'label' => 'Ko`rish (Turkmaniston fuqarolari uchun)',
+                'format' => 'html',
+                'value' => function (Section $model, $key, $index) {
+                    return Html::a('Ariza', ['site/resume-send', 'id' => $model->id], ['class' => 'btn btn-info']);
+                }
+
+            ],
         ]
     ]) ?>
 </div>

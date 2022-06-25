@@ -46,6 +46,7 @@ $user = Yii::$app->getUser()->getIdentity();
             <?php
             $menuItems = [];
             if ($user->isAdmin() || $user->isXalqaro()) {
+                $menuItems[] = ['label' => 'Turkman ', 'icon' => '	fas fa-user-circle', 'url' => ['/turkman/index']];
                 $menuItems[] = ['label' => 'Profile', 'icon' => '	fas fa-user-circle', 'url' => ['/profile/index']];
 
                 $menuItems[] = ['label' => 'Latest', 'icon' => 'fa fa-user-circle', 'url' => ['site/latest']];
