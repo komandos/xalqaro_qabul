@@ -85,7 +85,7 @@ use yii\widgets\MaskedInput;
             </td>
             <td class="col-sm-8">
                 <?= $form->field($model, 'state_id')->widget(Select2Default::class, [
-                    'data' => ArrayHelper::map(\common\models\State::find()->where(['id'=>2])->all(), 'id', 'name'),
+                    'data' => ArrayHelper::map(\common\models\State::find()->all(), 'id', 'name'),
                     'options' => ['placeholder' => 'Select a state ...'],
                     'pluginOptions' => [
                         'allowClear' => true
@@ -253,8 +253,7 @@ use yii\widgets\MaskedInput;
             </td>
         </tr>
         <tr>
-            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ingliz tili
-                        sertifikati</font></font>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tibbiy maʼlumotnoma (086 shakli)</font></font>
             </td>
             <td>
                 <?= $form->field($model, 'sertifikat')->fileInput()->label(' ') ?>
