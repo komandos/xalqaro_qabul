@@ -5,8 +5,6 @@ jobs:
   build:
     name: Build
     runs-on: self-hosted
-    container:
-      image: ubuntu-20.04-lts:latest
     steps:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
