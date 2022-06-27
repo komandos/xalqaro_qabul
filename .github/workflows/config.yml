@@ -16,3 +16,4 @@ jobs:
         script: |
           cd Web/xalqaro 
           ls -al
+          git pull origin main
