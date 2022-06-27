@@ -28,7 +28,7 @@ $this->title = Yii::t('app', 'UrSU Xalqaro qabul');
     <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">1 . Pasport va xalqaro&nbsp;pasport;<br />
 2. Oʼzbekistonda yashash guvohnomasi nusxasi (vid na jitelstvo) - agar mavjud boʼlsa;<br />
 3. Xorijiy fuqaroning oʼrta yoki oʼrta maxsus, kasb-hunar maʼlumotini tasdiqlovchi shahodatnoma/diplom/ sertifikatning oʼzbek yoki rus tiliga tarjima qilingan va notarius tomonidan tasdiqlangan hujjat;<br />
-4. Tibbiy maʼlumotnoma (086 shakli)<br />
+4. Tibbiy  maʼlumotnoma (086 shakli) <br />
 5. Fotosurat (3,5-4,5); (alohida elektron shakli)<br />
 Talab etiladigan hujjatlarning elektoron shakli(PDF shaklida, koʼrsatilgan hujjatlar tartibi raqami saqlangan 1 fayl boʼlgan holda) quyidagi Ariza tugmasi orqali Ariza qoldirishingiz mumkin</span></strong></span></p>
 
