@@ -32,71 +32,74 @@ $this->title = Yii::t('app', 'UrSU Xalqaro qabul');
 5. Fotosurat (3,5-4,5); (alohida elektron shakli)<br />
 Talab etiladigan hujjatlarning elektoron shakli(PDF shaklida, koʼrsatilgan hujjatlar tartibi raqami saqlangan 1 fayl boʼlgan holda) quyidagi Ariza tugmasi orqali Ariza qoldirishingiz mumkin</span></strong></span></p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'pager' => ['class' => '\yii\bootstrap4\LinkPager'],
-        'options' => [
-            'class' => ' table-responsive'
-        ],
-        'columns' => [
-            ['class' => SerialColumn::class],
+<!--    --><?//= GridView::widget([
+//        'dataProvider' => $dataProvider,
+//        'pager' => ['class' => '\yii\bootstrap4\LinkPager'],
+//        'options' => [
+//            'class' => ' table-responsive'
+//        ],
+//        'columns' => [
+//            ['class' => SerialColumn::class],
+////            [
+////                'label' => 'Shifr',
+////                'attribute' => 'code',
+////            ],
+////            [
+////                'label' => 'Ta`lim yo`nalishlari va mutaxassisliklari nomi',
+////                'attribute' => 'direction',
+////            ],
+////            [
+////                'label' => 'Xamkor xorijiy oliy ta`lim muassasasi nomi',
+////                'attribute' => 'university',
+////            ],
+////            [
+////                'label' => 'To`lov-kantrakti asosida qabul ko`rsatkichlari',
+////                'attribute' => 'quota'
+////            ],
+////            [
+////                'label' => 'Ta`lim shakli',
+////                'attribute' => 'form_education',
+////            ],
+////            [
+////                'label' => 'Ta`lim tili',
+////                'attribute' => 'edu_lang',
+////            ],
+////            [
+////                'label' => 'O`qish muddati (OTM + xamkor OTM,yil)',
+////                'attribute' => 'duration',
+////            ],
+////            [
+////                'label' => 'Ta`lim turi',
+////                'value' =>function(Section $model){
+////                    if ($model->type ==='bakalavr'){
+////                        return 'Bakalavriyat';
+////                    }
+////                    if ($model->type === 'magistr'){
+////                        return 'Magistratura';
+////                    }
+////                }
+////            ],
+////
+////            [
+////                'label' => 'Ko`rish',
+////                'format' => 'html',
+////                'value' => function (Section $model, $key, $index) {
+////                    return Html::a('Ariza', ['site/send-resume', 'id' => $model->id], ['class' => 'btn btn-info']);
+////                }
+////
+////            ],
 //            [
-//                'label' => 'Shifr',
-//                'attribute' => 'code',
-//            ],
-//            [
-//                'label' => 'Ta`lim yo`nalishlari va mutaxassisliklari nomi',
-//                'attribute' => 'direction',
-//            ],
-//            [
-//                'label' => 'Xamkor xorijiy oliy ta`lim muassasasi nomi',
-//                'attribute' => 'university',
-//            ],
-//            [
-//                'label' => 'To`lov-kantrakti asosida qabul ko`rsatkichlari',
-//                'attribute' => 'quota'
-//            ],
-//            [
-//                'label' => 'Ta`lim shakli',
-//                'attribute' => 'form_education',
-//            ],
-//            [
-//                'label' => 'Ta`lim tili',
-//                'attribute' => 'edu_lang',
-//            ],
-//            [
-//                'label' => 'O`qish muddati (OTM + xamkor OTM,yil)',
-//                'attribute' => 'duration',
-//            ],
-//            [
-//                'label' => 'Ta`lim turi',
-//                'value' =>function(Section $model){
-//                    if ($model->type ==='bakalavr'){
-//                        return 'Bakalavriyat';
-//                    }
-//                    if ($model->type === 'magistr'){
-//                        return 'Magistratura';
-//                    }
-//                }
-//            ],
-//
-//            [
-//                'label' => 'Ko`rish',
+//                'label' => 'Ko`rish ',
 //                'format' => 'html',
 //                'value' => function (Section $model, $key, $index) {
-//                    return Html::a('Ariza', ['site/send-resume', 'id' => $model->id], ['class' => 'btn btn-info']);
+//                    return Html::a('Ariza', ['site/resume-send', 'id' => $model->id], ['class' => 'btn btn-info']);
 //                }
 //
 //            ],
-            [
-                'label' => 'Ko`rish ',
-                'format' => 'html',
-                'value' => function (Section $model, $key, $index) {
-                    return Html::a('Ariza', ['site/resume-send', 'id' => $model->id], ['class' => 'btn btn-info']);
-                }
-
-            ],
-        ]
-    ]) ?>
+//        ]
+//    ]) ?>
+    <div class="text-center">
+    <a href="<?= Url::to('site/resume-send')?>" class = "btn btn-info">Ariza</a>
+    </div>
 </div>
 

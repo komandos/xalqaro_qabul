@@ -2,14 +2,11 @@
 
 namespace backend\controllers;
 
-use backend\models\search\ProfileSearch;
 use common\models\TurkmanProfile;
 use common\models\query\TurkmanProfileSearch;
-use yii\db\Connection;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Request;
 
 /**
  * TurkmanController implements the CRUD actions for TurkmanProfile model.
@@ -39,20 +36,17 @@ class TurkmanController extends Controller
      *
      * @return string
      */
-
-    public function actionIndex(int $export=null, Request  $request, Connection $db): string
+    public function actionIndex()
     {
-//        dd($db->createCommand("select * from profile limit 10")->queryAll());
         $searchModel = new TurkmanProfileSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        if ($export === 1) {
-            $searchModel->exportToExcel($dataProvider->query);
-        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
     /**
      * Displays a single TurkmanProfile model.
      * @param int $id ID
@@ -135,6 +129,6 @@ class TurkmanController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 }

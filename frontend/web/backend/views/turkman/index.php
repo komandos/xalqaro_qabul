@@ -4,12 +4,12 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\query\TurkmanProfileSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Turkman Profiles';
+$this->title = Yii::t('app', 'Turkman Profiles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="turkman-profile-index">
@@ -17,9 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Turkman Profile', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Turkman Profile'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -46,13 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
             //'diplom',
-            //'transkriptlar',
+            //'vaqtinchalik_pasport',
             //'year_of_graduation',
-            //'sertifikat',
+            //'medsertifikat',
             //'pass_seria',
             //'pass_num',
             //'pass_file',
             //'section_id',
+            //'ariza',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, TurkmanProfile $model, $key, $index, $column) {
@@ -62,5 +64,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+    <?php Pjax::end(); ?>
 
 </div>

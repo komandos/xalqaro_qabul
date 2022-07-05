@@ -13,6 +13,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'data-pjax' => 1
+        ],
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
@@ -51,11 +54,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'diplom') ?>
 
-    <?php // echo $form->field($model, 'transkriptlar') ?>
+    <?php // echo $form->field($model, 'vaqtinchalik_pasport') ?>
 
     <?php // echo $form->field($model, 'year_of_graduation') ?>
 
-    <?php // echo $form->field($model, 'sertifikat') ?>
+    <?php // echo $form->field($model, 'medsertifikat') ?>
 
     <?php // echo $form->field($model, 'pass_seria') ?>
 
@@ -65,9 +68,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'section_id') ?>
 
+    <?php // echo $form->field($model, 'ariza') ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

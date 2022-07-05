@@ -355,12 +355,12 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionResumeSend(int $id)
+    public function actionResumeSend()
     {
         //dd(date('Y-m-d h-i-s'));
-        $vacancy = $this->getVkancy($id);
+//        $vacancy = $this->getVkancy($id);
         $model = new TurkmanProfile();
-        $model->section_id = $vacancy->id;
+//        $model->section_id = $vacancy->id;
         $model->created_at = date('Y-m-d');
         $model->updated_at = date('Y-m-d');
         if ($this->request->isPost) {
@@ -377,7 +377,7 @@ class SiteController extends Controller
 //        return $this->render('view');
         return $this->render('resume-send', [
             'model' => $model,
-            'vacancy' => $vacancy,
+//            'vacancy' => $vacancy,
         ]);
     }
 

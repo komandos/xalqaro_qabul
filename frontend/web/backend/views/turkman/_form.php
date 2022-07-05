@@ -46,11 +46,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'diplom')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'transkriptlar')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'vaqtinchalik_pasport')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'year_of_graduation')->textInput() ?>
 
-    <?= $form->field($model, 'sertifikat')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'medsertifikat')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'pass_seria')->textInput(['maxlength' => true]) ?>
 
@@ -60,8 +60,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'section_id')->textInput() ?>
 
+    <?= $form->field($model, 'ariza')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

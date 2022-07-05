@@ -30,13 +30,14 @@ class m220625_063103_create_turkman_profile_table extends Migration
             'created_at' => $this->timestamp()->null(),
             'updated_at' => $this->timestamp()->null(),
             'diplom' => $this->string(255),
-            'transkriptlar' => $this->string(255),
+            'vaqtinchalik_pasport' => $this->string(255),
             'year_of_graduation' => $this->integer()->notNull(),
-            'sertifikat' => $this->string(255)->null(), // chet tillari bo'yicha
+            'medsertifikat' => $this->string(255)->null(), // 086 bo'yicha
             'pass_seria' => $this->string(10),
             'pass_num' => $this->string(50),
             'pass_file' => $this->string(200),
             'section_id' => $this->integer(),
+            'ariza'=>$this->string(255),
         ]);
     }
 

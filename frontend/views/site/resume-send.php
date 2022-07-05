@@ -43,19 +43,19 @@ use yii\widgets\MaskedInput;
                 </div>
             </td>
         </tr>
-        <tr>
-            <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;"> shu yerga ogohlantrish yozamiz</font></font><span class="text-danger"><font style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">*</font></font></span>
-            </td>
-            <td class="col-sm-4">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <?= $form->field($model, 'status')->checkbox(['required'=>true])->label(' ') ?>
-                    </div>
-                </div>
-            </td>
-        </tr>
+<!--        <tr>-->
+<!--            <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font-->
+<!--                            style="vertical-align: inherit;"> shu yerga ogohlantrish yozamiz</font></font><span class="text-danger"><font style="vertical-align: inherit;"><font-->
+<!--                                style="vertical-align: inherit;">*</font></font></span>-->
+<!--            </td>-->
+<!--            <td class="col-sm-4">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-sm-8">-->
+<!--                        --><?//= $form->field($model, 'status')->checkbox(['required'=>true])->label(' ') ?>
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--        </tr>-->
         <tr>
             <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">To'liq
@@ -85,7 +85,7 @@ use yii\widgets\MaskedInput;
             </td>
             <td class="col-sm-8">
                 <?= $form->field($model, 'state_id')->widget(Select2Default::class, [
-                    'data' => ArrayHelper::map(\common\models\State::find()->where(['id'=>2])->all(), 'id', 'name'),
+                    'data' => ArrayHelper::map(\common\models\State::find()->all(), 'id', 'name'),
                     'options' => ['placeholder' => 'Select a state ...'],
                     'pluginOptions' => [
                         'allowClear' => true
@@ -176,11 +176,8 @@ use yii\widgets\MaskedInput;
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-4">
-                                <?= $form->field($model, 'pass_seria')->widget(MaskedInput::className(), [
-                                    'mask' => 'A'
-                                ])
-                                    ->label('Passport Seriasi') ?>
+                            <div class="col-md-4 maxlength='2'">
+                                <?= $form->field($model, 'pass_seria')->textInput(['min'=>0,'max' => 2])->label('Passport Seriasi') ?>
                             </div>
                             <div class="col-md-8">
                                 <?= $form->field($model, 'pass_num')->widget(MaskedInput::className(), [
@@ -217,7 +214,17 @@ use yii\widgets\MaskedInput;
                       data-valmsg-replace="true"></span>
             </td>
         </tr>
-
+        <tr>
+            <td><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">Oʼzbekistonda yashash guvohnomasi nusxasi (vid na jitelstvo) - agar mavjud boʼlsa;</font></font>
+                <span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span>
+            </td>
+            <td>
+                <?= $form->field($model, 'vaqtinchalik_pasport')->fileInput(['required'=>true])->label(' ') ?>
+            </td>
+        </tr>
         <tr>
             <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Image </font></font>
                 <span class="text-danger"><font
@@ -232,7 +239,7 @@ use yii\widgets\MaskedInput;
         </tr>
 
         <tr>
-            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplom( notarial tasdqiqlangan holda rus tilida tarjimasi)</font></font>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplom yoki shaxodatnoma</font></font>
                 <span class="text-danger"><font
                             style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span>
@@ -241,25 +248,22 @@ use yii\widgets\MaskedInput;
                 <?= $form->field($model, 'diplom')->fileInput(['required'=>true])->label(' ') ?>
             </td>
         </tr>
-        <tr>
-            <td><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">Diplom ilovasi( notarial tasdqiqlangan holda rus tilida tarjimasi)</font></font>
-                <span class="text-danger"><font
-                            style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">*</font></font></span>
-            </td>
-            <td>
-                <?= $form->field($model, 'transkriptlar')->fileInput(['required'=>true])->label(' ') ?>
-            </td>
-        </tr>
+
         <tr>
             <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tibbiy maʼlumotnoma (086 shakli)</font></font>
             </td>
             <td>
-                <?= $form->field($model, 'sertifikat')->fileInput()->label(' ') ?>
+                <?= $form->field($model, 'medsertifikat')->fileInput()->label(' ') ?>
             </td>
         </tr>
-
+        <tr>
+            <td>
+                <font style="vertical-align: inherit">Ariza</font>
+            </td>
+            <td>
+                <?= $form->field($model, 'ariza')->fileInput()->label('') ?>
+            </td>
+        </tr>>
         </tbody>
     </table>
 
