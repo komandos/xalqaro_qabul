@@ -43,19 +43,7 @@ use yii\widgets\MaskedInput;
                 </div>
             </td>
         </tr>
-<!--        <tr>-->
-<!--            <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font-->
-<!--                            style="vertical-align: inherit;"> shu yerga ogohlantrish yozamiz</font></font><span class="text-danger"><font style="vertical-align: inherit;"><font-->
-<!--                                style="vertical-align: inherit;">*</font></font></span>-->
-<!--            </td>-->
-<!--            <td class="col-sm-4">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-sm-8">-->
-<!--                        --><?//= $form->field($model, 'status')->checkbox(['required'=>true])->label(' ') ?>
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </td>-->
-<!--        </tr>-->
+
         <tr>
             <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">To'liq
@@ -197,7 +185,7 @@ use yii\widgets\MaskedInput;
 
     <div class="sectionHeader"><font style="vertical-align: inherit;"><font
                     style="vertical-align: inherit;font-size: 20px;">
-                Fayllaringizni quyida yuklang:</font></font><br>
+                Fayllaringizni quyida yuklang:</font></font>
     </div>
     <table class="table">
         <tbody>
@@ -219,7 +207,7 @@ use yii\widgets\MaskedInput;
                             style="vertical-align: inherit;">Oʼzbekistonda yashash guvohnomasi nusxasi (vid na jitelstvo) - agar mavjud boʼlsa;</font></font>
                 <span class="text-danger"><font
                             style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">*</font></font></span>
+                                style="vertical-align: inherit;"></font></font></span>
             </td>
             <td>
                 <?= $form->field($model, 'vaqtinchalik_pasport')->fileInput(['required'=>true])->label(' ') ?>
