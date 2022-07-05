@@ -239,7 +239,9 @@ use yii\widgets\MaskedInput;
 
         <tr>
             <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tibbiy maʼlumotnoma (086 shakli)</font></font>
-            </td>
+                <span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span></td>
             <td>
                 <?= $form->field($model, 'medsertifikat')->fileInput()->label(' ') ?>
             </td>
@@ -247,7 +249,9 @@ use yii\widgets\MaskedInput;
         <tr>
             <td>
                 <font style="vertical-align: inherit">Ariza</font>
-            </td>
+                <span class="text-danger"><font
+                            style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">*</font></font></span></td>
             <td>
                 <?= $form->field($model, 'ariza')->fileInput()->label('') ?>
             </td>
