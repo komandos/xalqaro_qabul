@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "{{%turkman_profile}}".
@@ -50,11 +52,11 @@ class TurkmanProfile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['state_id', 'province_id', 'region_id', 'gender_id', 'year_of_graduation'], 'required'],
+            [['state_id', 'province_id', 'region_id', 'gender_id'], 'required'],
             [['state_id', 'gender_id', 'year_of_graduation', 'section_id'], 'default', 'value' => null],
-            [['state_id', 'gender_id', 'year_of_graduation', 'section_id'], 'integer'],
+            [['state_id', 'gender_id',  'section_id'], 'integer'],
             [['address', 'image'], 'string'],
-            [['date_birth', 'created_at', 'updated_at'], 'safe'],
+            [['date_birth', 'created_at', 'year_of_graduation','updated_at'], 'safe'],
             [['status'], 'boolean'],
             [['first_name', 'last_name', 'patronymic', 'phone_1', 'phone_2', 'email', 'pass_num'], 'string', 'max' => 50],
             [['province_id', 'region_id', 'diplom', 'vaqtinchalik_pasport', 'medsertifikat', 'ariza'], 'string', 'max' => 255],
@@ -96,5 +98,46 @@ class TurkmanProfile extends \yii\db\ActiveRecord
             'section_id' => 'Section ID',
             'ariza' => 'Ariza',
         ];
+    }
+    public function uploadImages(): bool
+    {
+
+        if (!$this->uploadFolder('uploads', 'image')) {
+            return false;
+        }
+        if (!$this->uploadFolder('diplom', 'diplom')) {
+            return false;
+        }
+        if (!$this->uploadFolder('password', 'pass_file')) {
+            return false;
+        }
+        if (!$this->uploadFolder('vaqtinchalik_pasport', 'vaqtinchalik_pasport')) {
+            return false;
+        }
+        if (!$this->uploadFolder('ariza', 'ariza')) {
+            return false;
+        }
+        $this->uploadFolder('medsertifikat', 'medsertifikat');
+        return true;
+    }
+    public function uploadFolder(string $path, string $attribute)
+    {
+        $path_up = Yii::getAlias('@assets') . '/' . $path .'/'. date('Y-m');
+        $file = UploadedFile::getInstance($this, $attribute);
+
+        if ($file instanceof UploadedFile) {
+            $fileUrl = uniqid() . '.' . $file->extension;
+            if (FileHelper::createDirectory($path_up) > strtotime(date('Y-m'))) {
+                return false;
+            }
+
+            if (!$file->saveAs($path_up . '/' . $fileUrl)) {
+                return false;
+            }
+            $this->$attribute = $path.'/'.date('Y-m') . '/' . $fileUrl;
+            return true;
+        }
+
+        return false;
     }
 }

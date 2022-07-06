@@ -2,4 +2,5 @@
 
 return [
     'Home' => 'Bosh sahifa',
+    ''
 ];

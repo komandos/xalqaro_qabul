@@ -32,8 +32,7 @@ use yii\widgets\MaskedInput;
         <tbody>
         <tr>
             <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;"> O'qishni yakunlagan sanasi</font></font><span class="text-danger"><font style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">*</font></font></span>
+                            style="vertical-align: inherit;"> O'qishni yakunlagan sanasi</font></font>
             </td>
             <td class="col-sm-4">
                 <div class="row">
@@ -170,8 +169,7 @@ use yii\widgets\MaskedInput;
                             <div class="col-md-8">
                                 <?= $form->field($model, 'pass_num')->widget(MaskedInput::className(), [
                                     'mask' => '9999999'
-                                ])
-                                    ->label('Passport Raqami') ?>
+                                ])->label('Passport Raqami') ?>
                             </div>
                         </div>
                     </div>
