@@ -26,6 +26,7 @@ use yii\widgets\MaskedInput;
 <div class="site-index">
     <h1>
         <?= Yii::t('app', 'Form') ?>
+
     </h1>
     <?php $form = ActiveForm::begin(); ?>
     <table id="PersonalDetails" class="table table-condensed table-bordered">
