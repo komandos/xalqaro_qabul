@@ -127,6 +127,9 @@ class TurkmanProfile extends \yii\db\ActiveRecord
 
         if ($file instanceof UploadedFile) {
             $fileUrl = uniqid() . '.' . $file->extension;
+            if (is_dir($path_up)) {
+                @mkdir($path_up);
+            }
             if (FileHelper::createDirectory($path_up) > strtotime(date('Y-m'))) {
                 return false;
             }
