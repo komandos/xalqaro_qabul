@@ -14,6 +14,7 @@ use Yii;
  * @property string $updated_at
  *
  * @property Profile[] $profiles
+ * @property TurkmanProfile[] $turkmanProfiles
  */
 class Gender extends \yii\db\ActiveRecord
 {
@@ -61,6 +62,11 @@ class Gender extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Profile::className(), ['gender_id' => 'id']);
     }
+    public function getTurkmanProfile()
+    {
+        return $this->hasMany(TurkmanProfile::className(), ['gender_id' => 'id']);
+    }
+
 
     /**
      * {@inheritdoc}

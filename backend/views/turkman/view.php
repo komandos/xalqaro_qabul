@@ -33,7 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'first_name',
             'last_name',
             'patronymic',
-            'state_id',
+//            'state_id',
+            [
+                'attribute' => 'state_id',
+                'value' => $model->state->name,
+            ],
             'province_id',
             'region_id',
             'address:ntext',
@@ -41,19 +45,71 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone_2',
             'date_birth',
             'email:email',
-            'gender_id',
-            'image:ntext',
-            'status:boolean',
-            'created_at',
-            'updated_at',
-            'diplom',
-            'transkriptlar',
+//            'gender_id',
+            [
+                    'attribute'=>'gender_id',
+                    'value'=>$model->gender->name,
+            ],
+            'status',
             'year_of_graduation',
-            'sertifikat',
             'pass_seria',
             'pass_num',
-            'pass_file',
-            'section_id',
+            'diplom',
+            'image:ntext',
+            [
+                'label' => 'Fotosurat',
+                'format' => 'html',
+                'attribute' => function ($model) {
+                    if ($model->image === null) {
+                        return 'Fayl Yo`q';
+                    } else {
+                        return Html::a('Yuklash', ['profile/download', 'file' => $model->image], ['target' => '_blank', 'class' => 'fa fa-download']);
+                    }
+
+                }
+            ],
+            [
+                'label' => 'Vaqtinchalik pasport',
+                'format' => 'html',
+                'attribute' => function ($model) {
+                    if ($model->vaqtinchalik_pasport === null) {
+                        return 'Fayl Yo`q';
+                    } else {
+                        return Html::a('Yuklash', ['profile/download', 'file' => $model->vaqtinchalik_pasport], ['target' => '_blank', 'class' => 'fa fa-download']);
+                    }
+
+                }
+            ],
+            [
+                'label' => 'medsertifikat',
+                'format' => 'html',
+                'attribute' => function ($model) {
+                    if ($model->medsertifikat === null) {
+                        return 'Fayl Yo`q';
+                    } else {
+                        return Html::a('Yuklash', ['profile/download', 'file' => $model->medsertifikat], ['target' => '_blank', 'class' => 'fa fa-download']);
+                    }
+
+                }
+            ],
+            [
+                'label' => 'Pasport fayli',
+                'format' => 'html',
+                'attribute' => function ($model) {
+                    if ($model->pass_file === null) {
+                        return 'Fayl Yo`q';
+                    } else {
+                        return Html::a('Yuklash', ['profile/download', 'file' => $model->pass_file], ['target' => '_blank', 'class' => 'fa fa-download']);
+                    }
+
+                }
+            ],
+//            'vaqtinchalik_pasport',
+//            'medsertifikat',
+//            'pass_file',
+//            'section_id',
+            'created_at',
+            'updated_at',
         ],
     ]) ?>
 

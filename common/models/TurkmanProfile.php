@@ -35,9 +35,21 @@ use yii\web\UploadedFile;
  * @property string|null $pass_file
  * @property int|null $section_id
  * @property string|null $ariza
+ * @property State  $state
+ * @property Gender  $gender
  */
 class TurkmanProfile extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => \yii\behaviors\TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -52,7 +64,7 @@ class TurkmanProfile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['state_id', 'province_id', 'region_id', 'gender_id'], 'required'],
+            [['state_id', 'province_id', 'region_id', 'gender_id', 'vaqtinchalik_pasport', 'medsertifikat', 'ariza', 'year_of_graduation'], 'required'],
             [['state_id', 'gender_id', 'year_of_graduation', 'section_id'], 'default', 'value' => null],
             [['state_id', 'gender_id',  'section_id'], 'integer'],
             [['address', 'image'], 'string'],
@@ -142,5 +154,13 @@ class TurkmanProfile extends \yii\db\ActiveRecord
         }
 
         return false;
+    }
+    public function getState()
+    {
+        return $this->hasOne(State::className(), ['id' => 'state_id']);
+    }
+    public function getGender()
+    {
+        return $this->hasOne(Gender::className(),['id'=>'gender_id']);
     }
 }
