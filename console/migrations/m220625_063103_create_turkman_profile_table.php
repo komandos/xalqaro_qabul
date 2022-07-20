@@ -22,7 +22,7 @@ class m220625_063103_create_turkman_profile_table extends Migration
             'address' => $this->text(),
             'phone_1' => $this->string(50),
             'phone_2' => $this->string(50)->null(),
-            'date_birth' => $this->date(),
+            'date_birth' => $this->integer()->notNull(),
             'email' => $this->string(50),
             'gender_id' => $this->integer()->notNull(),
             'image' => $this->text(),

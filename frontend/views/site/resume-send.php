@@ -209,7 +209,7 @@ use yii\widgets\MaskedInput;
                                 style="vertical-align: inherit;"></font></font></span>
             </td>
             <td>
-                <?= $form->field($model, 'vaqtinchalik_pasport')->fileInput(['required'=>true])->label(' ') ?>
+                <?= $form->field($model, 'vaqtinchalik_pasport')->fileInput()->label(' ') ?>
             </td>
         </tr>
         <tr>
