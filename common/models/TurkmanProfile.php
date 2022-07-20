@@ -64,7 +64,7 @@ class TurkmanProfile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['state_id', 'province_id', 'region_id', 'gender_id', 'vaqtinchalik_pasport', 'medsertifikat', 'ariza', 'year_of_graduation'], 'required'],
+            [['state_id', 'province_id', 'region_id', 'gender_id',  'medsertifikat', 'ariza', 'year_of_graduation'], 'required'],
             [['state_id', 'gender_id', 'year_of_graduation', 'section_id'], 'default', 'value' => null],
             [['state_id', 'gender_id',  'section_id'], 'integer'],
             [['address', 'image'], 'string'],
