@@ -329,42 +329,15 @@ class SiteController extends Controller
      */
 
 
-    public function actionSendResume(int $id)
-    {
-        //dd(date('Y-m-d h-i-s'));
-        $vacancy = $this->getVkancy($id);
-        $model = new Profile();
-        $model->section_id = $vacancy->id;
-        $model->created_at = date('Y-m-d');
-        $model->updated_at = date('Y-m-d');
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->validate()) {
-                if ($model->uploadImages() && $model->save()) {
-                    Yii::$app->session->setFlash('success','Sizning ma`lumotlaringiz yuklandi!');
-                    return $this->redirect(['index']);
-                }
-            }
-            else {
-                $model->loadDefaultValues();
-            }
-        }
-//        return $this->render('view');
-        return $this->render('send-resume', [
-            'model' => $model,
-            'vacancy' => $vacancy,
-        ]);
-    }
+
 
     public function actionResumeSend()
     {
-        //dd(date('Y-m-d h-i-s'));
-//        $vacancy = $this->getVkancy($id);
+
         $model = new TurkmanProfile();
-//        $model->section_id = $vacancy->id;
-        $model->created_at = date('Y-m-d');
-        $model->updated_at = date('Y-m-d');
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->validate()) {
+                $model->year_of_graduation = strtotime($_POST['TurkmanProfile']['year_of_graduation']);
                 if ($model->uploadImages() && $model->save()) {
                     Yii::$app->session->setFlash('success','Sizning ma`lumotlaringiz yuklandi!');
                     return $this->redirect(['index']);
@@ -374,11 +347,10 @@ class SiteController extends Controller
                 $model->loadDefaultValues();
             }
         }
-//        return $this->render('view');
         return $this->render('resume-send', [
             'model' => $model,
-//            'vacancy' => $vacancy,
         ]);
+
     }
 
     private function getVkancy(int $id): Section

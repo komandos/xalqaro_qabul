@@ -64,11 +64,11 @@ class TurkmanProfile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['state_id', 'province_id', 'region_id', 'gender_id',  'medsertifikat', 'ariza', 'year_of_graduation'], 'required'],
+            [['state_id', 'province_id', 'region_id', 'gender_id', 'year_of_graduation'], 'required'],
             [['state_id', 'gender_id', 'year_of_graduation', 'section_id'], 'default', 'value' => null],
             [['state_id', 'gender_id',  'section_id'], 'integer'],
             [['address', 'image'], 'string'],
-            [['date_birth', 'created_at', 'year_of_graduation','updated_at'], 'safe'],
+            [['date_birth'], 'safe'],
             [['status'], 'boolean'],
             [['first_name', 'last_name', 'patronymic', 'phone_1', 'phone_2', 'email', 'pass_num'], 'string', 'max' => 50],
             [['province_id', 'region_id', 'diplom', 'vaqtinchalik_pasport', 'medsertifikat', 'ariza'], 'string', 'max' => 255],
