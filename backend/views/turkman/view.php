@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'address:ntext',
             'phone_1',
             'phone_2',
-            'date_birth',
+            'date_birth:date',
             'email:email',
 //            'gender_id',
             [
@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value'=>$model->gender->name,
             ],
             'status',
-            'year_of_graduation',
+            'year_of_graduation:date',
             'pass_seria',
             'pass_num',
             [
