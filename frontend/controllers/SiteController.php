@@ -31,6 +31,7 @@ use frontend\models\ContactForm;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use yii\web\NotFoundHttpException;
+use yii\web\Request;
 use yii\web\UploadedFile;
 
 /**
@@ -106,7 +107,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Section::find()->where(['status'=>1]),
+            'query' => Section::find()->where(['status' => 1]),
             'pagination' => [
                 'pageSize' => 10
             ]
@@ -329,31 +330,27 @@ class SiteController extends Controller
      */
 
 
-
-
-    public function actionResumeSend()
+    public function actionResumeSend(Request $request)
     {
 
         $model = new TurkmanProfile();
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->validate()) {
-                $model->year_of_graduation = strtotime($_POST['TurkmanProfile']['year_of_graduation']);
-                if ($model->uploadImages() && $model->save()) {
-                    Yii::$app->session->setFlash('success','Sizning ma`lumotlaringiz yuklandi!');
-                    return $this->redirect(['index']);
-                }
+
+        if ($request->isPost && $model->load($this->request->post())) {
+            $model->year_of_graduation = strtotime($this->request->post('year_of_graduation'));
+            $model->date_birth = strtotime($this->request->post('date_birth'));
+            if ($model->uploadImages() && $model->save()) {
+                Yii::$app->session->setFlash('success', 'Sizning ma`lumotlaringiz yuklandi!');
+                return $this->redirect(['index']);
             }
-            else {
-                $model->loadDefaultValues();
-            }
+
         }
-        return $this->render('resume-send', [
-            'model' => $model,
-        ]);
+        $model->loadDefaultValues();
+        return $this->render('resume-send', ['model' => $model,]);
 
     }
 
-    private function getVkancy(int $id): Section
+    private
+    function getVkancy(int $id): Section
     {
         $model = Section::findOne(['id' => $id]);
         if ($model !== null) {

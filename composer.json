@@ -40,7 +40,8 @@
     "mihaildev/yii2-ckeditor": "^1.0",
     "kartik-v/yii2-widget-datepicker": "^1.4",
     "kartik-v/yii2-widget-datetimepicker": "^1.4",
-    "kartik-v/yii2-date-range": "^1.7"
+    "kartik-v/yii2-date-range": "^1.7",
+    "rmrevin/yii2-fontawesome": "^3.7"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",
