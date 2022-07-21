@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'pass_file',
 //            'section_id',
             [
-                'label' => 'Diplom',
+                'label' => 'Ariza',
                 'format' => 'html',
                 'attribute' => function ($model) {
                     if ($model->ariza === null) {
