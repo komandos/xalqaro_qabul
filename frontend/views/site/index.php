@@ -34,7 +34,7 @@ Talab etiladigan hujjatlarning elektoron shakli(PDF shaklida, koʼrsatilgan hujj
 
 
     <div class="text-center">
-    <a href="<?= Url::to('site/resume-send')?>" class = "btn btn-info">Ariza</a>
+    <a href="<?= Url::to(['site/resume-send'])?>" class = "btn btn-info">Ariza</a>
     </div>
 </div>
 

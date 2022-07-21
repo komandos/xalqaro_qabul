@@ -30,7 +30,7 @@ use yii\widgets\MaskedInput;
     </h1>
     <?php $form = ActiveForm::begin(); ?>
     <table id="PersonalDetails" class="table table-condensed table-bordered">
-        <tbody>
+<!--        <tbody>-->
         <tr>
             <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;"> O'qishni yakunlagan sanasi</font></font>
@@ -38,7 +38,19 @@ use yii\widgets\MaskedInput;
             <td class="col-sm-4">
                 <div class="row">
                     <div class="col-sm-8">
-                        <?= $form->field($model, 'year_of_graduation')->textInput(['type' =>'date'])->label('Sana') ?>
+                        <?= $form->field($model, 'year_of_graduation')->widget(\kartik\date\DatePicker::class,
+                            [
+                                'options' => [
+                                    'startDate' => "M",
+                                    'viewMode' => "days",
+                                    'minViewMode' => "days",
+                                    'format' => 'dd-mm-yyyy',
+                                    'firstDay' => '1'
+                                ],
+                                'pluginOptions' => [
+                                    'autoclose' => true,
+                                ]
+                            ])->label(false) ?>
                     </div>
                 </div>
             </td>
@@ -81,7 +93,7 @@ use yii\widgets\MaskedInput;
                 ])->label('Davlat'); ?>
                 <?= $form->field($model, 'province_id')->textInput()->label('Viloyat'); ?>
                 <?= $form->field($model, 'region_id')->textInput()->label('Tuman'); ?>
-                <?= $form->field($model,'address')->textInput()->label('Manzil')?>
+                <?= $form->field($model, 'address')->textInput()->label('Manzil') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="citizenship_id"
                       data-valmsg-replace="true"></span>
             </td>
@@ -113,7 +125,19 @@ use yii\widgets\MaskedInput;
                                 style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td class="col-sm-8">
-                <?= $form->field($model, 'date_birth')->textInput(['type' => 'date']) ?>
+                <?= $form->field($model, 'date_birth')->widget(\kartik\date\DatePicker::class,
+                    [
+                        'options' => [
+                            'startDate' => "M",
+                            'viewMode' => "days",
+                            'minViewMode' => "days",
+                            'format' => 'dd-mm-yyyy',
+                            'firstDay' => '1'
+                        ],
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                        ]
+                    ]) ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="PersonalDetails.email"
                       data-valmsg-replace="true"></span>
             </td>
@@ -165,7 +189,7 @@ use yii\widgets\MaskedInput;
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-4 maxlength='2'">
-                                <?= $form->field($model, 'pass_seria')->textInput(['min'=>0,'max' => 2])->label('Passport Seriasi') ?>
+                                <?= $form->field($model, 'pass_seria')->textInput(['min' => 0, 'max' => 2])->label('Passport Seriasi') ?>
                             </div>
                             <div class="col-md-8">
                                 <?= $form->field($model, 'pass_num')->widget(MaskedInput::className(), [
@@ -179,31 +203,28 @@ use yii\widgets\MaskedInput;
                       data-valmsg-replace="true"></span>
             </td>
         </tr>
-        </tbody>
+<!--        </tbody>-->
     </table>
-
-    <div class="sectionHeader"><font style="vertical-align: inherit;"><font
-                    style="vertical-align: inherit;font-size: 20px;">
-                Fayllaringizni quyida yuklang:</font></font>
+    <div class="">
+        Fayllaringizni quyida yuklang:
     </div>
     <table class="table">
         <tbody>
         <tr>
-            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Passport elektronni
-                        shakli </font></font>
-                <span class="text-danger"><font
-                            style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">*</font></font></span>
+            <td>
+                <div class="text">Passport elektronni <span class="text-danger">*</span>
+                </div>
             </td>
             <td>
-                <?= $form->field($model, 'pass_file')->fileInput(['required'=>true])->label(' ') ?>
+                <?= $form->field($model, 'pass_file')->fileInput(['required' => true])->label(' ') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="coverLetterFiles"
                       data-valmsg-replace="true"></span>
             </td>
         </tr>
         <tr>
             <td><font style="vertical-align: inherit;"><font
-                            style="vertical-align: inherit;">Oʼzbekistonda yashash guvohnomasi nusxasi (vid na jitelstvo) - agar mavjud boʼlsa;</font></font>
+                            style="vertical-align: inherit;">Oʼzbekistonda yashash guvohnomasi nusxasi (vid na
+                        jitelstvo) - agar mavjud boʼlsa;</font></font>
                 <span class="text-danger"><font
                             style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;"></font></font></span>
@@ -219,25 +240,27 @@ use yii\widgets\MaskedInput;
                                 style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td>
-                <?= $form->field($model, 'image')->fileInput(['required'=>true])->label(' ') ?>
+                <?= $form->field($model, 'image')->fileInput(['required' => true])->label(' ') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="cvFiles"
                       data-valmsg-replace="true"></span>
             </td>
         </tr>
 
         <tr>
-            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplom yoki shaxodatnoma</font></font>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Diplom yoki
+                        shaxodatnoma</font></font>
                 <span class="text-danger"><font
                             style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td>
-                <?= $form->field($model, 'diplom')->fileInput(['required'=>true])->label(' ') ?>
+                <?= $form->field($model, 'diplom')->fileInput(['required' => true])->label(' ') ?>
             </td>
         </tr>
 
         <tr>
-            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tibbiy maʼlumotnoma (086 shakli)</font></font>
+            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tibbiy maʼlumotnoma (086
+                        shakli)</font></font>
                 <span class="text-danger"><font
                             style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span></td>
@@ -254,7 +277,7 @@ use yii\widgets\MaskedInput;
             <td>
                 <?= $form->field($model, 'ariza')->fileInput()->label('') ?>
             </td>
-        </tr>>
+        </tr>
         </tbody>
     </table>
 
