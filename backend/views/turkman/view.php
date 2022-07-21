@@ -54,8 +54,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'year_of_graduation',
             'pass_seria',
             'pass_num',
-            'diplom',
-            'image:ntext',
+            [
+                'label' => 'Diplom',
+                'format' => 'html',
+                'attribute' => function ($model) {
+                    if ($model->diplom === null) {
+                        return 'Fayl Yo`q';
+                    } else {
+                        return Html::a('Yuklash', ['profile/download', 'file' => $model->diplom], ['target' => '_blank', 'class' => 'fa fa-download']);
+                    }
+
+                }
+            ],
+//            'diplom',
+//            'image:ntext',
             [
                 'label' => 'Fotosurat',
                 'format' => 'html',
@@ -108,6 +120,18 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'medsertifikat',
 //            'pass_file',
 //            'section_id',
+            [
+                'label' => 'Diplom',
+                'format' => 'html',
+                'attribute' => function ($model) {
+                    if ($model->ariza === null) {
+                        return 'Fayl Yo`q';
+                    } else {
+                        return Html::a('Yuklash', ['profile/download', 'file' => $model->ariza], ['target' => '_blank', 'class' => 'fa fa-download']);
+                    }
+
+                }
+            ],
             'created_at',
             'updated_at',
         ],
