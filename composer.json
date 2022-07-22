@@ -35,7 +35,7 @@
     "yiisoft/yii2-authclient": "^2.2",
     "yiisoft/yii2-twig": "^2.4",
     "cinghie/yii2-multilanguage": "^2.0",
-    "kartik-v/yii2-widget-fileinput": "^1.1",
+    "kartik-v/yii2-widget-fileinput": "dev-master",
     "mihaildev/yii2-elfinder": "^1.4",
     "mihaildev/yii2-ckeditor": "^1.0",
     "kartik-v/yii2-widget-datepicker": "^1.4",

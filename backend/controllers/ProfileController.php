@@ -32,7 +32,7 @@ class ProfileController extends Controller
                 ],
                 'access' => [
                     'class' => \yii\filters\AccessControl::class,
-                    'only' => ['create', 'update','index','view'],
+                    'only' => ['create', 'update', 'index', 'view'],
                     'rules' => [
                         // deny all POST requests
 //                        [
@@ -59,7 +59,7 @@ class ProfileController extends Controller
      * @param Connection $db
      * @return string
      */
-    public function actionIndex(int $export=null, Request  $request, Connection $db): string
+    public function actionIndex(int $export = null, Request $request, Connection $db): string
     {
 //        dd($db->createCommand("select * from profile limit 10")->queryAll());
         $searchModel = new ProfileSearch();
@@ -158,11 +158,11 @@ class ProfileController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionDownload($file){
+    public function actionDownload($file)
+    {
         $path = Yii::getAlias('@assets/') . $file;
         if (file_exists($path)) {
             return Yii::$app->response->sendFile($path);
         }
-
     }
 }
