@@ -124,6 +124,7 @@ class TurkmanProfile extends \yii\db\ActiveRecord
         if (!$this->uploadFolder('uploads', 'image')) {
             return false;
         }
+
         if (!$this->uploadFolder('diplom', 'diplom')) {
             return false;
         }
@@ -140,23 +141,27 @@ class TurkmanProfile extends \yii\db\ActiveRecord
         return true;
     }
 
+    /**
+     * @throws \yii\base\Exception
+     */
     public function uploadFolder(string $path, string $attribute)
     {
         $path_up = Yii::getAlias('@assets') . '/' . $path . '/' . date('Y-m');
         $file = UploadedFile::getInstance($this, $attribute);
 
         if ($file instanceof UploadedFile) {
-            $fileUrl = uniqid() . '.' . $file->extension;
-            if (is_dir($path_up)) {
-                @mkdir($path_up);
-            }
+            $fileUrl = Yii::$app->security->generateRandomString(12) . '.' . $file->extension;
+//            if (is_dir($path_up)) {
+//                @mkdir($path_up);
+//            }
             if (FileHelper::createDirectory($path_up) > strtotime(date('Y-m'))) {
                 return false;
             }
+//            if (!$file->saveAs($path_up . '/' . $fileUrl)) {
+////                dd([$path_up . '' . $fileUrl, $file->error, $file->extension,$file]);
+////                return false;
+//            }
 
-            if (!$file->saveAs($path_up . '/' . $fileUrl)) {
-                return false;
-            }
             $this->$attribute = $path . '/' . date('Y-m') . '/' . $fileUrl;
             return true;
         }
