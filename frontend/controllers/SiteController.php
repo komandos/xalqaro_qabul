@@ -342,9 +342,7 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('success', 'Sizning ma`lumotlaringiz yuklandi!');
                 return $this->redirect(['index']);
             }
-
-            dd($model->getErrors());
-
+//            dd($model->getErrors());
         }
         $model->loadDefaultValues();
         return $this->render('resume-send', ['model' => $model,]);
