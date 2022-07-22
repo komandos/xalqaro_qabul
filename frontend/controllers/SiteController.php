@@ -343,6 +343,8 @@ class SiteController extends Controller
                 return $this->redirect(['index']);
             }
 
+            dd($model->getErrors());
+
         }
         $model->loadDefaultValues();
         return $this->render('resume-send', ['model' => $model,]);
