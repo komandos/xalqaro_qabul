@@ -16,51 +16,52 @@ $this->title = 'Turkman Profiles';
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
-    <h1><?= Html::encode($this->title) ?></h1>
+            <h1><?= Html::encode($this->title) ?></h1>
 
 
+            <!--    --><?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?= Html::a('Export', ['index', 'export' => 1], ['class' => 'btn btn-outline-info']) ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-<!--    --><?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-            <?= Html::a('Export' ,['index','export'=>1],['class'=>'btn btn-outline-info'])?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                    'id',
+                    'first_name',
+                    'last_name',
+                    'patronymic',
+                    'state_id',
+                    //'province_id',
+                    //'region_id',
+                    //'address:ntext',
+                    //'phone_1',
+                    //'phone_2',
+                    //'date_birth',
+                    //'email:email',
+                    //'gender_id',
+                    //'image:ntext',
+                    //'status:boolean',
+                    //'created_at',
+                    //'updated_at',
+                    //'diplom',
+                    //'transkriptlar',
+                    //'year_of_graduation',
+                    //'sertifikat',
+                    //'pass_seria',
+                    //'pass_num',
+                    //'pass_file',
+                    //'section_id',
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, TurkmanProfile $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        },
+                        'template' => '{view} {delete}',
 
-            'id',
-            'first_name',
-            'last_name',
-            'patronymic',
-            'state_id',
-            //'province_id',
-            //'region_id',
-            //'address:ntext',
-            //'phone_1',
-            //'phone_2',
-            //'date_birth',
-            //'email:email',
-            //'gender_id',
-            //'image:ntext',
-            //'status:boolean',
-            //'created_at',
-            //'updated_at',
-            //'diplom',
-            //'transkriptlar',
-            //'year_of_graduation',
-            //'sertifikat',
-            //'pass_seria',
-            //'pass_num',
-            //'pass_file',
-            //'section_id',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, TurkmanProfile $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+                    ],
+                ],
+            ]); ?>
 
         </div>
     </div>
