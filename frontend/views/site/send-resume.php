@@ -263,7 +263,7 @@ use yii\widgets\MaskedInput;
                                 style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td>
-                <?= $form->field($model, 'transkriptlar')->fileInput(['required'=>true])->label(' ') ?>
+                <?= $form->field($model, 'transkriptlar')->fileInput()->label(' ') ?>
             </td>
         </tr>
         <tr>

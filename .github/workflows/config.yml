@@ -14,6 +14,6 @@ jobs:
         password: ${{ secrets.SSH_PASS }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd Web/xalqaro 
+          cd Web/xalqaro_qabul 
           ls -al
           git pull origin main
