@@ -28,9 +28,11 @@ use yii\widgets\MaskedInput;
         <?= Yii::t('app', 'Form') ?>
 
     </h1>
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data']
+    ]); ?>
     <table id="PersonalDetails" class="table table-condensed table-bordered">
-<!--        <tbody>-->
+        <!--        <tbody>-->
         <tr>
             <td class="col-sm-2 text-right"><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;"> O'qishni yakunlagan sanasi</font></font>
@@ -203,7 +205,7 @@ use yii\widgets\MaskedInput;
                       data-valmsg-replace="true"></span>
             </td>
         </tr>
-<!--        </tbody>-->
+        <!--        </tbody>-->
     </table>
     <div class="">
         Fayllaringizni quyida yuklang:
@@ -216,7 +218,34 @@ use yii\widgets\MaskedInput;
                 </div>
             </td>
             <td>
-                <?= $form->field($model, 'pass_file')->fileInput(['required' => true])->label(' ') ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <?= $form->field($model, 'pass_file')->widget(\kartik\file\FileInput::class, [
+                            'options' => [
+                                'multiple' => false,
+                                'accept' => 'application/pdf',
+                            ],
+                            'pluginOptions' => [
+
+                                'size' => 'xs',
+                                'showPreview' => false,
+                                'showCaption' => true,
+                                'showRemove' => true,
+                                'showUpload' => false,
+                                'browseClass' => 'btn btn-primary',
+                                'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                                'browseLabel' => 'Passportni tanlang',
+                                'removeClass' => 'btn btn-danger',
+                                'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> ',
+                                'removeLabel' => 'Faylni o\'chirish',
+                                'maxFileSize' => 20000,
+                                'msgSizeTooLarge' => 'Fayl haqda juda katta',
+                                'msgInvalidFileType' => 'Fayl formati to\'g\'ri emas',
+                            ]
+                        ])->label(' ') ?>
+                    </div>
+                </div>
+
                 <span class="field-validation-valid text-danger" data-valmsg-for="coverLetterFiles"
                       data-valmsg-replace="true"></span>
             </td>
@@ -230,7 +259,28 @@ use yii\widgets\MaskedInput;
                                 style="vertical-align: inherit;"></font></font></span>
             </td>
             <td>
-                <?= $form->field($model, 'vaqtinchalik_pasport')->fileInput()->label(' ') ?>
+                <?= $form->field($model, 'vaqtinchalik_pasport')->widget(\kartik\file\FileInput::class, [
+                    'options' => [
+                        'multiple' => false,
+                        'accept' => 'application/pdf',
+                    ],
+                    'pluginOptions' => [
+                        'size' => 'xs',
+                        'showPreview' => false,
+                        'showCaption' => true,
+                        'showRemove' => true,
+                        'showUpload' => false,
+                        'browseClass' => 'btn btn-primary',
+                        'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                        'browseLabel' => 'Vaqtinchalik pasportni tanlang',
+                        'removeClass' => 'btn btn-danger',
+                        'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> ',
+                        'removeLabel' => 'Faylni o\'chirish',
+                        'maxFileSize' => 20000,
+                        'msgSizeTooLarge' => 'Fayl haqda juda katta',
+                        'msgInvalidFileType' => 'Fayl formati to\'g\'ri emas',
+                    ]
+                ])->label(' ') ?>
             </td>
         </tr>
         <tr>
@@ -240,7 +290,28 @@ use yii\widgets\MaskedInput;
                                 style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td>
-                <?= $form->field($model, 'image')->fileInput(['required' => true])->label(' ') ?>
+                <?= $form->field($model, 'image')->widget(\kartik\file\FileInput::class, [
+                    'options' => [
+                        'multiple' => false,
+                        'accept' => 'image/*',
+                    ],
+                    'pluginOptions' => [
+                        'size' => 'xs',
+                        'showPreview' => false,
+                        'showCaption' => true,
+                        'showRemove' => true,
+                        'showUpload' => false,
+                        'browseClass' => 'btn btn-primary',
+                        'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                        'browseLabel' => 'Rasmni tanlang',
+                        'removeClass' => 'btn btn-danger',
+                        'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> ',
+                        'removeLabel' => 'Faylni o\'chirish',
+                        'maxFileSize' => 20000,
+                        'msgSizeTooLarge' => 'Fayl haqda juda katta',
+                        'msgInvalidFileType' => 'Fayl formati to\'g\'ri emas',
+                    ]
+                ])->label(' ') ?>
                 <span class="field-validation-valid text-danger" data-valmsg-for="cvFiles"
                       data-valmsg-replace="true"></span>
             </td>
@@ -254,7 +325,29 @@ use yii\widgets\MaskedInput;
                                 style="vertical-align: inherit;">*</font></font></span>
             </td>
             <td>
-                <?= $form->field($model, 'diplom')->fileInput(['required' => true])->label(' ') ?>
+                <?= $form->field($model, 'diplom')->widget(\kartik\file\FileInput::class,
+                    [
+                        'options' => [
+                            'multiple' => false,
+                            'accept' => 'application/pdf',
+                        ],
+                        'pluginOptions' => [
+                            'size' => 'xs',
+                            'showPreview' => false,
+                            'showCaption' => true,
+                            'showRemove' => true,
+                            'showUpload' => false,
+                            'browseClass' => 'btn btn-primary',
+                            'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                            'browseLabel' => 'Diplom yoki shaxodatnoma',
+                            'removeClass' => 'btn btn-danger',
+                            'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> ',
+                            'removeLabel' => 'Faylni o\'chirish',
+                            'maxFileSize' => 20000,
+                            'msgSizeTooLarge' => 'Fayl haqda juda katta',
+                            'msgInvalidFileType' => 'Fayl formati to\'g\'ri emas',
+                        ]
+                    ])->label(' ') ?>
             </td>
         </tr>
 
@@ -265,7 +358,28 @@ use yii\widgets\MaskedInput;
                             style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span></td>
             <td>
-                <?= $form->field($model, 'medsertifikat')->fileInput()->label(' ') ?>
+                <?= $form->field($model, 'medsertifikat')->widget(\kartik\file\FileInput::class, [
+                    'options' => [
+                        'multiple' => false,
+                        'accept' => 'application/pdf',
+                    ],
+                    'pluginOptions' => [
+                        'size' => 'xs',
+                        'showPreview' => false,
+                        'showCaption' => true,
+                        'showRemove' => true,
+                        'showUpload' => false,
+                        'browseClass' => 'btn btn-primary',
+                        'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                        'browseLabel' => 'Tibbiy maʼlumotnoma',
+                        'removeClass' => 'btn btn-danger',
+                        'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> ',
+                        'removeLabel' => 'Faylni o\'chirish',
+                        'maxFileSize' => 20000,
+                        'msgSizeTooLarge' => 'Fayl haqda juda katta',
+                        'msgInvalidFileType' => 'Fayl formati to\'g\'ri emas',
+                    ]
+                ])->label(' ') ?>
             </td>
         </tr>
         <tr>
@@ -275,7 +389,28 @@ use yii\widgets\MaskedInput;
                             style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span></td>
             <td>
-                <?= $form->field($model, 'ariza')->fileInput()->label('') ?>
+                <?= $form->field($model, 'ariza')->widget(\kartik\file\FileInput::class, [
+                    'options' => [
+                        'multiple' => false,
+                        'accept' => 'application/pdf',
+                    ],
+                    'pluginOptions' => [
+                        'size' => 'xs',
+                        'showPreview' => false,
+                        'showCaption' => true,
+                        'showRemove' => true,
+                        'showUpload' => false,
+                        'browseClass' => 'btn btn-primary',
+                        'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                        'browseLabel' => 'Ariza',
+                        'removeClass' => 'btn btn-danger',
+                        'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> ',
+                        'removeLabel' => 'Faylni o\'chirish',
+                        'maxFileSize' => 20000,
+                        'msgSizeTooLarge' => 'Fayl haqda juda katta',
+                        'msgInvalidFileType' => 'Fayl formati to\'g\'ri emas',
+                    ]
+                ])->label(' ') ?>
             </td>
         </tr>
         </tbody>

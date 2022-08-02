@@ -338,7 +338,16 @@ class SiteController extends Controller
         if ($request->isPost && $model->load($this->request->post())) {
             $model->year_of_graduation = strtotime($this->request->post('year_of_graduation'));
             $model->date_birth = strtotime($this->request->post('date_birth'));
-            if ($model->uploadImages() && $model->save()) {
+            $names = ['image', 'diplom', 'pass_file', 'vaqtinchalik_pasport', 'ariza', 'medsertifikat'];
+            $dirs = ['uploads', 'diplom', 'password', 'vaqtinchalik_pasport', 'ariza', 'medsertifikat'];
+            foreach ($names as $key => $name) {
+                $file = UploadedFile::getInstance($model, $name);
+                if ($file instanceof UploadedFile) {
+                    $model->$name = $dirs[$key] . '/' . $file->name;
+                    $file->saveAs(Yii::getAlias('@assets') . '/' . $dirs[$key] . '/' . $file->name);
+                }
+            }
+            if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Sizning ma`lumotlaringiz yuklandi!');
                 return $this->redirect(['index']);
             }
