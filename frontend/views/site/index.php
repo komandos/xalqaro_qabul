@@ -21,7 +21,11 @@ use yii\widgets\MaskedInput;
 $this->title = Yii::t('app', 'UrSU Xalqaro qabul');
 ?>
 <div class="site-index">
+    <div class="text-center">
+        <a href="<?= Url::to(['/Suhbat.pdf'])?>" class = "btn btn-info">Xorijiy fuqarolar qabuli uchun o'tkazilgan suhbat jadvali</a>
+    </div>
     <h4 style="margin-top: 3rem;" class="text-center">
+
         <?= Yii::t('app', "Urganch davlat universitetining 
 2022-2023-o'quv yili uchun xorijiy fuqarolar qabuli") ?> </h4>
     <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">
@@ -36,6 +40,7 @@ $this->title = Yii::t('app', 'UrSU Xalqaro qabul');
     <div class="text-center">
     <a href="<?= Url::to(['site/resume-send'])?>" class = "btn btn-info">Ariza</a>
     </div>
+
 
 
 
