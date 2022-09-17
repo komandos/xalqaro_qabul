@@ -35,9 +35,9 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => Yii::t('app','Ariza (Namunasi)'), 'url' => ['/Ariza.docx']],
-        ['label' => Yii::t('app','Заявление (образец)'), 'url' => ['/Заявление.docx']],
-        ['label' => Yii::t('app','Application (Sample)'), 'url' => ['/Application.docx']],
+//        ['label' => Yii::t('app','Ariza (Namunasi)'), 'url' => ['/Ariza.docx']],
+//        ['label' => Yii::t('app','Заявление (образец)'), 'url' => ['/Заявление.docx']],
+//        ['label' => Yii::t('app','Application (Sample)'), 'url' => ['/Application.docx']],
         //['label' => Yii::t('app','Questions'), 'url' => ['/site/questions']],
 //        ['label' => 'About', 'url' => ['/site/about']],
 //        ['label' => 'Contact', 'url' => ['/site/contact']],

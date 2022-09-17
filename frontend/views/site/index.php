@@ -1,79 +1,42 @@
-<?php
-
-/* @var $this yii\web\View */
-/* @var $model Section */
-
-/* @var $dataProvider \yii\data\ActiveDataProvider */
-
-use backend\widgets\Select2Default;
-use common\models\Gender;
-use common\models\Province;
-use common\models\Section;
-use kartik\depdrop\DepDrop;
-use yii\bootstrap4\ActiveForm;
-use yii\grid\GridView;
-use yii\grid\SerialColumn;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\widgets\MaskedInput;
-
-$this->title = Yii::t('app', 'UrSU Xalqaro qabul');
-?>
-<div class="site-index">
-    <div class="text-center">
-        <a href="<?= Url::to(['/Suhbat.pdf'])?>" class = "btn btn-info">Xorijiy fuqarolar qabuli uchun o'tkazilgan suhbat jadvali</a>
-    </div>
-    <h4 style="margin-top: 3rem;" class="text-center">
-
-        <?= Yii::t('app', "Urganch davlat universitetining 
-2022-2023-o'quv yili uchun xorijiy fuqarolar qabuli") ?> </h4>
-    <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">
-                    1 . Pasport va xalqaro&nbsp;pasport;<br />
-                    2. Oʼzbekistonda yashash guvohnomasi nusxasi (vid na jitelstvo) - agar mavjud boʼlsa;<br />
-                    3. Xorijiy fuqaroning oʼrta yoki oʼrta maxsus, kasb-hunar maʼlumotini tasdiqlovchi shahodatnoma/diplom/ sertifikatning oʼzbek yoki rus tiliga tarjima qilingan va notarius tomonidan tasdiqlangan hujjat;<br />
-                    4. Tibbiy  maʼlumotnoma (086 shakli) <br />
-                    5. Fotosurat (3,5-4,5); (alohida elektron shakli)<br />
-                    Talab etiladigan hujjatlarning elektoron shakli(PDF shaklida, koʼrsatilgan hujjatlar tartibi raqami saqlangan 1 fayl boʼlgan holda) quyidagi Ariza tugmasi orqali Ariza qoldirishingiz mumkin</span></strong></span>
-    </p>
-    <hr>
-    <div class="text-center">
-    <a href="<?= Url::to(['site/resume-send'])?>" class = "btn btn-info">Ariza</a>
-    </div>
-
-
-
-
-    <h4 style="margin-top: 3rem;" class="text-center">
-        <?= Yii::t('app', "Прием иностранных граждан в Ургенчский государственный университет на 2022-2023 учебный год") ?> </h4>
-    <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">
-                    1.	Паспорт и загранпаспорт;<br>
-                    2.	Копия справки проживании в Узбекистане (вид на жительство) - при наличии;<br>
-                    3.	Аттестат/диплом/сертификат, подтверждающий среднее или среднее специальное образование иностранного гражданина, переведенный на узбекский или русский язык и нотариально заверенный;<br>
-                    4.	Медицинская справка (форма 086);<br>
-                    5.	Фото (3,5-4,5); (отдельная электронная форма)<br>
-                    Электронную форму необходимых документов (в формате PDF, с 1 файлом с порядковым номером указанных документов) можно подать, нажав кнопку Заявка ниже.<br>
-    </p>
-    <hr>
-    <div class="text-center">
-        <a href="<?= Url::to(['site/resume-send'])?>" class = "btn btn-info">Заявление</a>
-    </div>
-
-
-
-
-    <h4 style="margin-top: 3rem;" class="text-center">
-        <?= Yii::t('app', "Admission of international students of Urganch State University for the academic year 2022-2023") ?> </h4>
-    <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">.
-                    1. Passport and international passport;<br>
-                    2. Copy of the certificate of residence in Uzbekistan (vid na zhitelstvo) - if available;<br>
-                    3. Certificate/diploma of secondary special education or Higher education translated into Uzbek, English or Russian  certified by a notary;<br>
-                    4. Medical certificate (form 086)<br>
-                    5. Photo (3.5-4.5)<br>
-    </p>
-    <hr>
-    <div class="text-center">
-        <a href="<?= Url::to(['site/resume-send'])?>" class = "btn btn-info">Application</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web sahifa</title>
+<!--    <link rel="stylesheet" href="style.css">-->
+</head>
+<body>
+<div class="main">
+    <div class="content">
+        <br><br> <br> <br> <br> <br> <br> <br> <br> <h1>Horijiy fuqorolar uchun qabul tugadi</h1>
     </div>
 </div>
 
+
+</body>
+</html>
+
+
+<style>
+
+    .main{
+        width: 100%;
+        background:linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(4.jpg);
+        background-position:center;
+        height: 970px;
+        background-size: cover;
+
+    }
+
+    .content {
+        font-family: 'Times New Roman';
+        font-size: 40px;
+        color: #fff;
+        letter-spacing: 2px;
+        padding-left: 20%;
+        letter-spacing: 2px;
+    }
+
+</style>

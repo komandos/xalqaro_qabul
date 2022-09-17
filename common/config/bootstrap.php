@@ -19,6 +19,7 @@ Yii::setAlias('@malumotlar', dirname(__DIR__, 2) . '/asset/malumotlar/');
 Yii::setAlias('@questions', dirname(__DIR__, 2) . '/asset/questions/');
 Yii::setAlias('@passport', dirname(__DIR__, 2) . '/asset/passport/');
 Yii::setAlias('@assets', dirname(__DIR__, 2) . '/asset');
+Yii::setAlias('@web', dirname(__DIR__, 2) . '/web');
 
 
 function dd(...$varibles)
