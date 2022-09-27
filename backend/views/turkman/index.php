@@ -19,7 +19,7 @@ $this->title = 'Turkman Profiles';
             <h1><?= Html::encode($this->title) ?></h1>
 
 
-            <!--    --><?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<!--                --><?php // echo $this->render('_search', ['model' => $searchModel]); ?>
             <?= Html::a('Export', ['index', 'export' => 1], ['class' => 'btn btn-outline-info']) ?>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
