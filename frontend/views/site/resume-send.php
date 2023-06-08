@@ -419,6 +419,10 @@ use yii\widgets\MaskedInput;
     <br>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app','Ariza (Namunasi)'), ['/Ariza.doc'], ['class' => 'btn btn-danger']) ?>
+        <?= Html::a(Yii::t('app','Заявление (образец)'), ['/Заявление.docx'], ['class' => 'btn btn-danger']) ?>
+        <?= Html::a(Yii::t('app','Application (Sample)'), ['/Application.docx'], ['class' => 'btn btn-danger']) ?>
+
     </div>
 
     <?php ActiveForm::end(); ?>
