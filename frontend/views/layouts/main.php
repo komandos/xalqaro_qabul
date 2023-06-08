@@ -75,8 +75,7 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; <?= Yii::t('app','UrSU team') ?> <?= date('Y') ?></p>
-        <p class="float-right">Version 0.1</p>
+        <p class="float-left">&copy; UrDU RTTM<?= date('Y') ?></p>
     </div>
 </footer>
 
