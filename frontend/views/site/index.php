@@ -22,12 +22,12 @@ $this->title = Yii::t('app', 'UrSU Xalqaro qabul');
 ?>
     <div class="site-index">
         <div class="text-center">
-            <a href="<?= Url::to(['/Suhbat.pdf'])?>" class = "btn btn-info">Xorijiy fuqarolar qabuli uchun o'tkazilgan suhbat jadvali</a>
+            <a href="<?= Url::to('https://urdu.uz/uz/site/active?id=244')?>" class = "btn btn-info">Ta'lim yo'nalishi va mutaxasisliklar</a>
         </div>
         <h4 style="margin-top: 3rem;" class="text-center">
 
             <?= Yii::t('app', "Urganch davlat universitetining 
-2022-2023-o'quv yili uchun xorijiy fuqarolar qabuli") ?> </h4>
+2023-2024-o'quv yili uchun xorijiy fuqarolar qabuli") ?> </h4>
         <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">
                     1 . Pasport va xalqaro&nbsp;pasport;<br />
                     2. Oʼzbekistonda yashash guvohnomasi nusxasi (vid na jitelstvo) - agar mavjud boʼlsa;<br />
@@ -45,7 +45,7 @@ $this->title = Yii::t('app', 'UrSU Xalqaro qabul');
 
 
         <h4 style="margin-top: 3rem;" class="text-center">
-            <?= Yii::t('app', "Прием иностранных граждан в Ургенчский государственный университет на 2022-2023 учебный год") ?> </h4>
+            <?= Yii::t('app', "Прием иностранных граждан в Ургенчский государственный университет на 2023-2024 учебный год") ?> </h4>
         <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">
                     1.	Паспорт и загранпаспорт;<br>
                     2.	Копия справки проживании в Узбекистане (вид на жительство) - при наличии;<br>
@@ -63,7 +63,7 @@ $this->title = Yii::t('app', 'UrSU Xalqaro qabul');
 
 
         <h4 style="margin-top: 3rem;" class="text-center">
-            <?= Yii::t('app', "Admission of international students of Urganch State University for the academic year 2022-2023") ?> </h4>
+            <?= Yii::t('app', "Admission of international students of Urganch State University for the academic year 2023-2024") ?> </h4>
         <p style="margin-top: 2rem;"><span style="text-align: right;font-family:times new roman,times,serif"><strong><span style="font-size:16px">.
                     1. Passport and international passport;<br>
                     2. Copy of the certificate of residence in Uzbekistan (vid na zhitelstvo) - if available;<br>
